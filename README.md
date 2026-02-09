@@ -7,6 +7,7 @@
 | skill name | folder dir | description | original github url |
 | --- | --- | --- | --- |
 | `humanizer` | `./humanizer` | Remove signs of AI-generated writing and rewrite text to sound more natural and human-written. | [https://github.com/blader/humanizer](https://github.com/blader/humanizer) |
+| `superpowers` | `./superpowers` | Complete software development workflow for coding agents with composable skills and process guardrails. | [https://github.com/obra/superpowers](https://github.com/obra/superpowers) |
 
 ## Notes
 
