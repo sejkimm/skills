@@ -7,10 +7,10 @@
 
 | skill name | folder dir | description | original github url |
 | --- | --- | --- | --- |
-| `humanizer` | `./humanizer` | Remove signs of AI-generated writing and rewrite text to sound more natural and human-written. | [https://github.com/blader/humanizer](https://github.com/blader/humanizer) |
-| `superpowers` | `./superpowers` | Complete software development workflow for coding agents with composable skills and process guardrails. | [https://github.com/obra/superpowers](https://github.com/obra/superpowers) |
-| `ui-ux-pro-max` | `./ui-ux-pro-max` | UI and UX design intelligence with searchable database. | [https://github.com/nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) |
-| `interactive-learning-guide` | `./interactive-learning-guide` | Create interactive HTML learning guides that explain projects, codebases, or technical concepts from scratch in a step-by-step, chapter-based format. | [https://github.com/sekjimm/skills/tree/main/interactive-learning-guide](https://github.com/sekjimm/skills/tree/main/interactive-learning-guide) |
+| `humanizer` | `./humanizer` | Remove signs of AI-generated writing and rewrite text to sound more natural and human-written. | [blader/humanizer](https://github.com/blader/humanizer) |
+| `superpowers` | `./superpowers` | Complete software development workflow for coding agents with composable skills and process guardrails. | [obra/superpowers](https://github.com/obra/superpowers) |
+| `ui-ux-pro-max` | `./ui-ux-pro-max` | UI and UX design intelligence with searchable database. | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) |
+| `interactive-learning-guide` | `./interactive-learning-guide` | Create interactive HTML learning guides | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/interactive-learning-guide) |
 
 ## Notes
 
