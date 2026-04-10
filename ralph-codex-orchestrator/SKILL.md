@@ -48,19 +48,27 @@ item is missing.
 
 Use these four items to compose the ralph-loop prompt in Phase 1.
 
-### Phase 1: Compose the Ralph-Loop Prompt
+### Phase 1: Compose and Launch the Ralph-Loop
 
-Build a structured prompt that embeds exit criteria, delegation rules, and review triggers so that
-the rules survive across iterations within the ralph-loop session.
+The ralph-loop slash command has strict limitations on argument parsing. Multi-line strings, angle
+brackets, pipe characters, backticks, and embedded slash commands inside the quoted argument will
+cause parsing failures. To avoid this, use the two-step approach below.
 
-```
-/ralph-loop "
+#### Step 1: Write the prompt to a temporary file
+
+Before invoking ralph-loop, write the full structured prompt to `/tmp/ralph-prompt.md` using the
+Bash tool or Write tool. This file serves as the detailed context that Claude will reference
+during iteration.
+
+Template for `/tmp/ralph-prompt.md`:
+
+```markdown
 ## Task
 [user-defined scope and requirements]
 
 ## Exit Criteria
 ALL of the following must be satisfied before completion:
-- [verification command] exits with code 0
+- Verification command exits with code 0: [verification command]
 - [any additional success conditions]
 
 ## Verification
@@ -68,23 +76,23 @@ At the start of every iteration, run the verification command to assess current 
 [verification command]
 
 ## Complexity Delegation Rules
-Delegate to /codex:rescue when any of the following occur:
+Delegate to codex rescue when any of the following occur:
 - The same failure repeats for 2 consecutive iterations
 - A large-scale refactoring spanning 3 or more files is required
 - An algorithm or architecture design decision is needed
 - Debugging undocumented behavior in an external library
 
 When delegating:
-1. Run /codex:rescue --background with a clear description of the problem and prior attempts
-2. Poll /codex:status until the job finishes
-3. Retrieve the result with /codex:result
+1. Run codex rescue in background mode with a clear description of the problem and prior attempts
+2. Poll codex status until the job finishes
+3. Retrieve the result with codex result
 4. Apply the result and immediately re-run the verification command
 
 ## Mid-Iteration Review Rules
-Run /codex:adversarial-review at these checkpoints:
+Run codex adversarial-review at these checkpoints:
 - Immediately after designing a new module, class, or major function
 - Immediately after completing a core algorithm implementation
-- When the verification command passes for the first time (before declaring completion)
+- When the verification command passes for the first time before declaring completion
 
 If the review surfaces a critical issue, resolve it before moving on.
 Minor suggestions can be noted and deferred.
@@ -93,15 +101,47 @@ Minor suggestions can be noted and deferred.
 If iteration count exceeds 75% of max-iterations without completion:
 - Document every approach attempted so far
 - Analyze remaining failure causes
-- Delegate the blocking problem to /codex:rescue
+- Delegate the blocking problem to codex rescue
 
-Output <promise>COMPLETE</promise>
-" --completion-promise "COMPLETE" --max-iterations [N]
+When all exit criteria are met, output COMPLETE as the final word.
 ```
+
+#### Step 2: Launch ralph-loop with a minimal one-line prompt
+
+After writing the file, read it back so its contents are in the conversation context. Then invoke
+ralph-loop with a **single-line, plain-text** prompt.
+
+```
+/ralph-loop "Implement [one-line scope]. Verify: [command]. Read /tmp/ralph-prompt.md for full rules. Output COMPLETE when done." --completion-promise "COMPLETE" --max-iterations [N]
+```
+
+**Strict rules for the inline prompt string:**
+
+- Maximum 200 characters
+- No angle brackets: do not use < or >
+- No backticks
+- No pipe characters
+- No embedded slash commands like /codex:rescue
+- No newlines: the entire prompt must be on a single line
+- If user-supplied values contain double quotes, replace them with single quotes before embedding
+- All detailed delegation and review rules come from Phase 2 below, not from this string
+
+#### Fallback: if ralph-loop still fails
+
+If the one-line approach also fails, try these alternatives in order:
+
+1. **No quotes around prompt**: `/ralph-loop Implement X and verify with Y then output COMPLETE --completion-promise COMPLETE --max-iterations N`
+2. **Single quotes**: `/ralph-loop 'Implement X. Verify: Y. Output COMPLETE when done.' --completion-promise 'COMPLETE' --max-iterations N`
+3. **Prompt only, no flags**: `/ralph-loop Implement X. Verify with Y. Output COMPLETE when all checks pass.` and rely on ralph-loop defaults for iteration limit.
+
+If all three fallbacks fail, notify the user that ralph-loop's argument parser is incompatible
+with the current invocation, and offer to run the iteration loop manually using Phase 2 rules
+without the ralph-loop wrapper.
 
 ### Phase 2: Behavior Rules During Iteration
 
-Once ralph-loop is running, follow these rules strictly.
+Once ralph-loop is running, follow these rules strictly. These rules are internalized by Claude
+before the loop starts; they are NOT passed as part of the ralph-loop argument.
 
 #### 2-1. Every Iteration Start
 
@@ -147,7 +187,7 @@ Minor suggestions can be recorded and addressed later.
 
 #### 2-4. Completion Gate
 
-Output `<promise>COMPLETE</promise>` ONLY when ALL of these are true:
+Output `COMPLETE` ONLY when ALL of these are true:
 
 1. The verification command returns exit code 0.
 2. Every user-defined additional condition is satisfied.
@@ -187,6 +227,14 @@ When the iteration limit is hit:
 1. Document progress so far.
 2. List remaining failures and approaches already tried.
 3. Report to the user and discuss next steps.
+
+### Ralph-loop argument parsing failure
+
+If ralph-loop fails to start due to argument parsing:
+1. Try the fallback invocation patterns listed in Phase 1 Step 2.
+2. If all fallbacks fail, run the iteration loop manually: execute the task, run verification,
+   and repeat until exit criteria are met or max iterations are reached.
+3. Follow all Phase 2 rules identically whether running inside ralph-loop or manually.
 
 ## Quick Reference
 
