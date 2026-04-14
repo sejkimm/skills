@@ -4,12 +4,14 @@
 - Updated: 2026.04.01 - Added `interactive-learning-guide` skill.
 - Updated: 2026.04.06 - Added `doc-rewriter` and `ralph-codex-orchestrator` skills.
 - Updated: 2026.04.10 - Added `consulting-style-deck` skill.
+- Updated: 2026.04.14 - Added `humanizer-ko` skill.
 
 ## Included Skills
 
 | skill name | folder dir | description | original github url |
 | --- | --- | --- | --- |
 | `humanizer` | `./humanizer` | Remove signs of AI-generated writing and rewrite text to sound more natural and human-written. | [blader/humanizer](https://github.com/blader/humanizer) |
+| `humanizer-ko` | `./humanizer-ko` | 한국어 텍스트에서 AI가 생성한 흔적을 제거하고 자연스러운 문체로 다듬는 skill. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/humanizer-ko) |
 | `superpowers` | `./superpowers` | Complete software development workflow for coding agents with composable skills and process guardrails. | [obra/superpowers](https://github.com/obra/superpowers) |
 | `ui-ux-pro-max` | `./ui-ux-pro-max` | UI and UX design intelligence with searchable database. | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) |
 | `interactive-learning-guide` | `./interactive-learning-guide` | Create interactive HTML learning guides | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/interactive-learning-guide) |
