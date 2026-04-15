@@ -5,6 +5,7 @@
 - Updated: 2026.04.06 - Added `doc-rewriter` and `ralph-codex-orchestrator` skills.
 - Updated: 2026.04.10 - Added `consulting-style-deck` skill.
 - Updated: 2026.04.14 - Added `humanizer-ko` skill.
+- Updated: 2026.04.15 - Added `autoresearch` skill.
 
 ## Included Skills
 
@@ -18,6 +19,7 @@
 | `doc-rewriter` | `./doc-rewriter` | Rewrite documents to improve readability, simplify difficult content, and polish language to a professional business tone. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/doc-rewriter) |
 | `ralph-codex-orchestrator` | `./ralph-codex-orchestrator` | Orchestrate ralph-loop and codex-plugin-cc together for autonomous development with rigorous verification. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/ralph-codex-orchestrator) |
 | `consulting-style-deck` | `./consulting-style-deck` | Build editorial, consulting-grade .pptx presentation decks in a polished strategy-firm visual style. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/consulting-style-deck) |
+| `autoresearch` | `./autoresearch` | Autonomous goal-directed iteration loop — modify, verify, keep/discard, repeat. Applies Karpathy's autoresearch principles to any task. | [uditgoenka/autoresearch](https://github.com/uditgoenka/autoresearch) |
 
 ## Notes
 
