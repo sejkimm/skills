@@ -127,6 +127,124 @@ Each chapter ends with a quiz. Good quiz questions:
 - Have one clearly correct answer and plausible distractors
 - Include an explanation that reinforces the key concept
 
+## Revision Mode: Feedback-Driven Rewrite
+
+An existing guide may need revision rather than creation from scratch. The most common
+revision pattern combines three passes in a single rewrite:
+
+### Pass 1: Sentence-Level Clarity Review
+
+Read every sentence in the existing guide sequentially. For each sentence, judge:
+- "A reader would understand this immediately" → keep as-is
+- "A reader would pause here" → add a `.supplement` box right after
+
+Supplement boxes explain what might not land on first read: unfamiliar terms, implicit
+assumptions, non-obvious logical jumps, or domain-specific jargon used without context.
+Don't paraphrase the original — add the missing context that makes it click.
+
+Good supplements:
+- Define the specific term that blocks understanding ("cross-fitted logistic probe"
+  → explain the split-and-predict mechanic)
+- Show the concrete scenario behind an abstract claim ("불완전한 판단으로 능력을
+  끌어낸다" → a 0.5B model labeling data for a 4B model)
+- Explain the mechanism, not just the name ("label exfiltration" → flipping one
+  prediction at a time and watching the score change)
+
+Bad supplements:
+- Restating the same sentence in different words
+- Adding background so broad it could apply to anything
+- Explaining things the target reader already knows
+
+### Pass 2: Narrative Refocus for a Specific Reader
+
+When the user specifies a reader persona (e.g., "quant researcher using autoresearch"),
+restructure the entire chapter order and framing around that reader's journey:
+
+1. **Identify the reader's entry point.** What do they already know? What's their
+   first question? Start there, not at the source material's beginning.
+
+2. **Reorder chapters by the reader's needs, not the paper's structure.** A paper
+   goes problem → method → results → discussion. A quant researcher reading the
+   same paper might need: why this matters to me → concept mapping → what to steal
+   → what to watch out for → how to set it up.
+
+3. **Weave the domain mapping into every concept**, not just a final "applications"
+   chapter. Each concept card should land with "here's how this shows up in your
+   work" right where the concept is explained.
+
+4. **Cut what the reader doesn't need.** If the reader already does autoresearch,
+   don't spend a chapter explaining what an agent is. Compress prerequisites and
+   expand the parts that change their practice.
+
+### Pass 3: Humanizer-KO Integration (Korean guides only)
+
+When revising Korean-language guides, apply humanizer-ko patterns during the rewrite
+rather than as a separate post-processing step. The key patterns to watch for:
+
+**Tone and register:**
+- Use 서술체 ("~이다/~한다") for guides, not 경어체 ("~입니다/~합니다"), unless the
+  user's existing guide uses 경어체 deliberately
+- Insert 1인칭 opinions where the author has a genuine take ("내가 가장 신경 쓰는
+  부분은 이거다")
+- Vary sentence rhythm — mix short declarative sentences with longer explanatory ones
+
+**Patterns to remove:**
+- AI vocabulary inflation: "획기적인", "핵심적인", "역동적인" → use plain alternatives
+- Chained connective endings: "~하며 ~하고 ~함으로써" → break into separate sentences
+- Rule-of-three listings for the sake of comprehensiveness → keep only what's needed
+- Negative parallelism: "단순히 X가 아니라 Y이다" → state Y directly
+- Vague authority: "전문가들은 ~라고 말한다" → cite the specific source or drop it
+
+**Patterns to keep:**
+- Technical terms in English: React, Kubernetes, Sharpe ratio, PGR
+- Korean loanwords that are fully naturalized: 서버, 데이터, 프로그램
+
+**How supplements interact with humanizer-ko:** Supplement boxes should be written in
+the same natural voice as the rest of the guide. Don't switch to a more formal or
+explanatory register inside supplements — they should feel like the author leaning in
+to clarify, not a textbook footnote.
+
+### The `.supplement` Component
+
+Add this CSS to the guide's stylesheet alongside `.analogy`:
+
+```css
+.supplement {
+  background: var(--card2);
+  border-left: 3px solid var(--ac-blue-dim);
+  border-radius: 0 12px 12px 0;
+  padding: 18px 22px;
+  margin: 16px 0;
+}
+.supplement::before {
+  content: "보충";
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--ac-blue-dim);
+  letter-spacing: .1em;
+  margin-bottom: 6px;
+}
+.supplement p {
+  font-size: 12.5px;
+  color: var(--t2);
+  line-height: 1.85;
+}
+```
+
+For English guides, change the `content` to `"SUPPLEMENT"`.
+
+HTML usage:
+```html
+<div class="supplement">
+  <p>Explanation that fills in the gap the preceding sentence left.</p>
+</div>
+```
+
+Place supplements immediately after the sentence or paragraph they clarify.
+Don't cluster multiple supplements — if two consecutive sentences both need
+clarification, put each supplement right after its sentence.
+
 ## Language
 
 Match the user's language. If the user writes in Korean, write the guide in Korean. If English,

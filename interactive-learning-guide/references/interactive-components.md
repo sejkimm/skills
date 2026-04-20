@@ -172,14 +172,36 @@ A concept card body typically contains a mix of these elements:
 3. **Diagrams** (`.dia > svg`): visual representations
 4. **Highlight boxes** (`.highlight.hl-*`): key insights
 5. **Analogy boxes** (`.analogy`): everyday comparisons
-6. **Tables** (`.tbl`): comparisons and data
+6. **Supplement boxes** (`.supplement`): clarifying context for sentences that might
+   not land on first read. Used primarily in revision mode. Place immediately after
+   the sentence or paragraph being clarified.
+7. **Tables** (`.tbl`): comparisons and data
 
 Order matters for pedagogy. A common effective pattern:
 
 - Start with a paragraph explaining the concept
+- If the sentence uses unfamiliar terms or has a non-obvious logical jump,
+  add a `.supplement` box immediately after
 - Show a diagram or analogy to make it concrete
 - Show the actual code
 - End with a highlight summarizing the key insight
+
+### Supplement Box HTML
+
+```html
+<div class="supplement">
+  <p>Clarifying context that fills in what the preceding sentence left implicit.
+  Written in the same voice as the rest of the guide — not a formal footnote.</p>
+</div>
+```
+
+Placement rules:
+- Place right after the sentence or `<p>` it clarifies
+- Don't cluster multiple supplements — if two consecutive sentences both need
+  clarification, put each supplement after its own sentence
+- Don't use supplements for things the target reader already knows
+- Supplements should add the missing concrete detail (a specific example, a
+  mechanism, a term definition), not restate the original in different words
 
 ## 3. Quiz Component
 

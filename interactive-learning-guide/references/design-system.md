@@ -404,6 +404,35 @@ them throughout. Or use unique IDs per SVG if needed.
 }
 ```
 
+### Supplement Box
+Used in revision mode to add clarifying context after sentences that might not
+land on first read. Visually similar to `.analogy` but with a blue-dim accent
+to distinguish it. Use `"보충"` for Korean guides, `"SUPPLEMENT"` for English.
+
+```css
+.supplement {
+  background: var(--card2);
+  border-left: 3px solid var(--ac-blue-dim);
+  border-radius: 0 12px 12px 0;
+  padding: 18px 22px;
+  margin: 16px 0;
+}
+.supplement::before {
+  content: "보충";  /* or "SUPPLEMENT" for English guides */
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--ac-blue-dim);
+  letter-spacing: .1em;
+  margin-bottom: 6px;
+}
+.supplement p {
+  font-size: 12.5px;
+  color: var(--t2);
+  line-height: 1.85;
+}
+```
+
 ### Table
 ```css
 .tbl {
