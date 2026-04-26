@@ -6,6 +6,7 @@
 - Updated: 2026.04.10 - Added `consulting-style-deck` skill.
 - Updated: 2026.04.14 - Added `humanizer-ko` skill.
 - Updated: 2026.04.15 - Added `autoresearch` skill.
+- Updated: 2026.04.26 - Added `create-obsidian-note` skill.
 
 ## Included Skills
 
@@ -20,6 +21,7 @@
 | `ralph-codex-orchestrator` | `./ralph-codex-orchestrator` | Orchestrate ralph-loop and codex-plugin-cc together for autonomous development with rigorous verification. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/ralph-codex-orchestrator) |
 | `consulting-style-deck` | `./consulting-style-deck` | Build editorial, consulting-grade .pptx presentation decks in a polished strategy-firm visual style. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/consulting-style-deck) |
 | `autoresearch` | `./autoresearch` | Autonomous goal-directed iteration loop — modify, verify, keep/discard, repeat. Applies Karpathy's autoresearch principles to any task. | [uditgoenka/autoresearch](https://github.com/uditgoenka/autoresearch) |
+| `create-obsidian-note` | `./create-obsidian-note` | Save conversations, technical explanations, external resource analysis, or reusable learning as Obsidian Learning Material notes. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/create-obsidian-note) |
 
 ## Notes
 
