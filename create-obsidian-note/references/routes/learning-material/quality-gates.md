@@ -5,7 +5,7 @@
 Confirm these conditions:
 
 - The current workspace or user-provided context identifies the target vault.
-- A `Learning Material` directory exists.
+- A learning-material tree or explicit equivalent exists.
 - Active operating rules and metadata rules were read from the vault.
 - The chosen folder exists in the current tree.
 - The note has exactly one physical home.
@@ -17,7 +17,7 @@ Confirm these conditions:
 Stop and ask one concise question if any of these are true:
 
 - The vault cannot be located.
-- `Learning Material` cannot be found.
+- The learning-material tree cannot be found.
 - Active rule documents are missing.
 - Multiple active rule documents conflict.
 - The folder tree and active rules disagree in a way that affects placement.
@@ -27,24 +27,16 @@ Stop and ask one concise question if any of these are true:
 
 ## After Writing
 
-Verify the result:
+Verify:
 
-```bash
-test -f "$NOTE_PATH"
-sed -n '1,40p' "$NOTE_PATH"
-find "Learning Material" -type f -name "$(basename "$NOTE_PATH")"
-```
-
-Check that:
-
+- The file exists.
 - Required frontmatter fields are present.
-- `primary` uses the active metadata vocabulary.
+- `primary`, when required, uses the active metadata vocabulary.
 - Optional metadata is useful and not decorative.
-- `assistant`, when present, uses canonical naming from the note-authoring rule. Legacy aliases such as `Opus 4.7`, `Sonnet 4.6`, `GPT o1`, `ChatGPT`, or comma-separated scalar values are not used.
-- `references`, when present, is an Obsidian-compatible list of URLs or vault links. Nested reference objects such as `references: - title: ...` are not used.
-- Extra source detail properties such as `source_title`, `source_author`, `published`, and `accessed` are not added by default.
+- `assistant`, when present, uses canonical naming from active rules.
+- `references`, when present, is an Obsidian-compatible list of URLs or vault links.
 - The note was not written into a branch folder that already contains subfolders, unless the active rules explicitly allow that folder type.
-- No private local absolute path was written into the note unless the note is explicitly about that local environment.
+- No private local absolute path was written unless the note is explicitly about that local environment.
 - Wikilinks point to likely existing notes, or speculative links are removed.
 - MOC files were not edited unless curated MOC handling was explicitly requested.
 
@@ -54,5 +46,6 @@ This skill may be published. Keep it portable:
 
 - Do not include private usernames, home directories, cloud-sync paths, machine names, or local project paths.
 - Do not encode one user's vault folder map into the skill.
-- Use relative examples rooted at `Learning Material`.
+- Use generic route examples and placeholders.
 - Keep personal operating decisions in the vault's canonical rule documents, not in the public skill.
+

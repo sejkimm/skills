@@ -1,39 +1,56 @@
 ---
 name: create-obsidian-note
-description: Use when the user asks to save a conversation, technical explanation, external resource analysis, or reusable learning as a new Obsidian note in a Learning Material vault.
+description: Use when the user asks to create, save, route, classify, or organize an Obsidian note or vault artifact across Inbox captures, learning notes, source clips, course records, career artifacts, project notes, assets, templates, or archive/system areas.
 ---
 
 # Create Obsidian Note
 
 ## Overview
 
-Create one distilled, reusable learning note in an Obsidian `Learning Material` tree. This skill is a resolver: it reads the vault's current canonical taxonomy rules at runtime instead of carrying a fixed folder map.
+This skill is an Obsidian note router. It decides what kind of vault artifact the user is asking for, loads only the relevant route instructions, and then creates or advises on the note.
 
-## When to Use
+The skill must stay portable. It must not encode a private vault snapshot, absolute local paths, personal folder names, file counts, real note titles, real project names, real company names, or dated inspection metadata.
 
-Use when the user explicitly asks to create or save a reusable Obsidian note from a conversation, explanation, source analysis, or technical learning artifact.
+## Required First Reference
 
-Do not use for project logs, course progress, article clipping, daily notes, or short-lived reminders unless the user explicitly says the note belongs in `Learning Material`.
+Always read:
 
-## Required References
+1. `references/privacy-and-portability.md`
+2. `references/router.md`
 
-Read these support files in order:
+Then read only the selected route reference.
 
-1. `references/taxonomy-resolution.md`
-2. `references/note-authoring.md`
-3. `references/quality-gates.md`
+## Route Selection
+
+Use the user's wording and the current vault context to select exactly one primary route:
+
+| User intent | Route |
+|---|---|
+| Unsorted note, unknown destination, temporary capture, or request to organize Inbox contents | `references/routes/inbox/route.md` |
+| Reusable concept, mechanism, technical explanation, paper note, or durable learning artifact | `references/routes/learning-material/route.md` |
+| Raw source clipping, copied article, quote, quick capture, or source-first note | `references/routes/source-note/route.md` |
+| Course, certification, cohort, challenge, language study, quiz, or learning progress record | `references/routes/learning-track/route.md` |
+| Job posting, resume, application, interview, coding test, assignment, recap, or admissions artifact | `references/routes/career-artifact/route.md` |
+| Project-specific plan, decision, design, research note, or project-local asset | `references/routes/project-note/route.md` |
+| Binary attachment, generated artifact, or shared file reference | `references/routes/asset-reference/route.md` |
+| Reusable note scaffold or prompt template | `references/routes/template-note/route.md` |
+| Obsidian configuration, trash, archive, recovery, or system-area decision | `references/routes/system-archive/route.md` |
+
+If two routes remain equally plausible after reading the router rules, ask one concise question. If the user explicitly names a route or folder, prefer that unless it conflicts with the route's stop conditions.
 
 ## Core Rules
 
-- Do not hardcode private absolute paths, personal vault names, dated rule filenames, or a fixed taxonomy table.
-- Locate the active `Learning Material` tree from the current workspace or from the user's explicit vault context.
-- Treat the vault's active operating rules and metadata rules as the source of truth.
-- Give every note exactly one physical home folder.
-- Preserve the vault's folder content rule: a normal folder should contain either subfolders or notes, not both, except for explicit taxonomy, MOC, index, archive, attachment, template, or Inbox exceptions defined by the active rules.
-- Use frontmatter for vendor, product, source, assistant, secondary domain, and cross-domain retrieval axes.
-- Do not manually edit Dataview MOC files unless the user explicitly asks for curated MOC handling.
-- If active rules conflict, required rule documents are missing, or placement remains ambiguous after applying the rules, stop and ask one concise question.
+- Classify by operational role before topic.
+- Give each normal note exactly one physical home.
+- Use vault-local active rules at runtime instead of hardcoding a folder map.
+- Use Inbox as the temporary home when the destination is unknown or the user asks for unsorted capture.
+- When organizing Inbox, full-scan the Inbox tree before moving or rewriting anything.
+- Preserve source context for source-first notes; do not force them into durable learning notes.
+- Promote notes between routes only when the note's role changes, not merely because the topic overlaps.
+- Use frontmatter only when it improves retrieval, provenance, routing, or lifecycle clarity.
+- Do not manually edit Dataview or MOC files unless the user explicitly asks for curated MOC handling.
+- Do not write private local paths, personal metadata, or inspection counts into generated notes unless the user explicitly asks for a local-environment note.
 
 ## Output Standard
 
-Write a note, not a transcript. Preserve the reusable conclusion, mechanism, evidence, limitations, and relevant links. Verify the file exists, frontmatter is valid, and no duplicate note was silently created.
+Write a note or routing recommendation, not a transcript. Preserve the reusable conclusion, source, context, limits, and relevant links according to the selected route. Verify the file exists and the frontmatter is valid whenever writing a file.
