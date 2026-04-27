@@ -36,7 +36,7 @@ Use role examples instead of private examples:
 - `project overview`
 - `generated artifact`
 - `meeting template`
-- `unsorted capture`
+- `Inbox triage`
 
 ## Runtime Inspection Rule
 

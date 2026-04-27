@@ -8,6 +8,7 @@ Confirm:
 - The selected route is clear.
 - The destination folder exists or the user explicitly asked to create it.
 - The note has one physical home.
+- New notes are not being written to Inbox.
 - Inbox organization requests used a full Inbox inventory, not a sample.
 - The title is specific enough to avoid ambiguity.
 - A duplicate or near-duplicate check was performed when creating a new Markdown note.
@@ -20,6 +21,7 @@ Stop and ask one concise question if:
 - The target vault cannot be identified.
 - Two routes remain equally plausible.
 - More than one Inbox candidate exists and the intended Inbox root cannot be identified.
+- The user wants to create a new note in Inbox or asks for an unsorted/temporary note without a non-Inbox destination.
 - The user appears to want a raw capture but also asks for a polished learning note.
 - The only apparent destination would violate a known vault-local folder rule.
 - Creating the note would silently duplicate an existing note.

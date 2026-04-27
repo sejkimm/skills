@@ -54,7 +54,6 @@ references:
   - https://example.com/source
 also_relevant:
   - <secondary-primary-lens-if-supported>
-placement_reason: "Why this physical folder is the primary home."
 ```
 
 Do not repeat the primary lens in `domains`. `domains` is an application or context axis, not the physical home.
@@ -95,4 +94,3 @@ Use the topic as the subject. Avoid Q&A framing unless the note is intentionally
 Default to metadata-first and index-optional. Do not manually edit MOC files when adding a normal note. Dataview MOCs update their rendered results from path, filename, and frontmatter.
 
 Only add curated MOC metadata or edit a curated MOC when the user explicitly requests curated MOC handling or the active rule document requires it for that note type.
-

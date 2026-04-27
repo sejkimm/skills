@@ -9,7 +9,7 @@ Choose the note route by operational role before topic. A note about the same to
 Ask these in order:
 
 1. Is the user asking to preserve a raw source quickly?
-2. Is the user asking for an unsorted capture or Inbox triage?
+2. Is the user asking to organize existing Inbox contents?
 3. Is the result meant to be reusable learning material?
 4. Is the item part of a course, certification, challenge, language cohort, or learning-progress record?
 5. Is it tied to a job, application, interview, resume, assignment, or admissions process?
@@ -22,7 +22,7 @@ Ask these in order:
 
 | Role | Reference |
 |---|---|
-| Unsorted capture or Inbox organization | `references/routes/inbox/route.md` |
+| Existing Inbox organization | `references/routes/inbox/route.md` |
 | Durable learning note | `references/routes/learning-material/route.md` |
 | Raw source or quick capture | `references/routes/source-note/route.md` |
 | Course or learning-progress record | `references/routes/learning-track/route.md` |
@@ -35,7 +35,8 @@ Ask these in order:
 ## Tie Breakers
 
 - If the user says "distill", "explain", "make reusable", or "learning note", prefer `learning-material`.
-- If the user says "Inbox", "unsorted", "triage", "sort my inbox", or "organize Inbox", prefer `inbox`.
+- If the user asks to sort, triage, or organize existing Inbox contents, prefer `inbox`.
+- If the user asks to create an unsorted note, temporary note, unknown-destination note, or new Inbox capture, ask for a non-Inbox destination before writing.
 - If the user says "copy", "clip", "save source", "just store this", or "no LLM", prefer `source-note`.
 - If the user says "course", "class", "certification", "quiz", "challenge", or "cohort", prefer `learning-track`.
 - If the user says "job", "resume", "application", "interview", "assignment", "coding test", or "admissions", prefer `career-artifact`.
@@ -43,6 +44,10 @@ Ask these in order:
 - If the user asks for a reusable prompt or note skeleton, prefer `template-note`.
 
 If two routes remain equally plausible, ask one concise question. Do not silently duplicate a note across routes.
+
+## New Note Destination Rule
+
+Do not create new notes in Inbox. A new note must resolve to a non-Inbox route and physical home before writing. If no non-Inbox destination is clear, ask one concise question instead of using Inbox as a fallback.
 
 ## Promotion Rule
 

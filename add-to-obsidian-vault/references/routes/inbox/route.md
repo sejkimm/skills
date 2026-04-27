@@ -2,12 +2,13 @@
 
 ## Use This Route When
 
-The user wants an unsorted note, a temporary capture, an unknown-destination note, or a request to organize Inbox contents.
-
-Use Inbox when speed matters more than correct final placement, or when the user explicitly asks to "put this somewhere for now."
+The user asks to organize, sort, triage, or route existing Inbox contents.
 
 ## Do Not Use This Route When
 
+- The user wants to create, save, write, or capture a new note.
+- The user wants an unsorted note, a temporary capture, an unknown-destination note, or asks to put a new note somewhere for now.
+- The user explicitly asks to create or save a new note in Inbox; ask for a non-Inbox destination or route instead.
 - The user already gave a clear destination route.
 - The user wants a polished reusable learning note.
 - The user wants a source-first clipping with clear source context and no ambiguity.
@@ -17,34 +18,9 @@ Use Inbox when speed matters more than correct final placement, or when the user
 
 Use the vault's active Inbox if one is defined by vault-local rules.
 
-If no active Inbox is defined and the user asks for unsorted capture, create or use a top-level `Inbox/` folder. This folder is intentionally generic and should not encode a private vault taxonomy.
+If no active Inbox is defined, ask one concise question before organizing or moving files.
 
-If multiple Inbox candidates exist, ask one concise question before writing or moving files.
-
-## New Inbox Note
-
-Use minimal metadata:
-
-```yaml
----
-date: YYYY-MM-DD HH:mm
-type: inbox-note
-status: needs-triage
-summary: ""
----
-```
-
-Add `references` only when a source URL or vault link is known. Add `assistant` only if an assistant materially helped write, summarize, translate, or structure the note.
-
-## Body
-
-Keep the body simple. Preserve the captured material and any user-provided context.
-
-Recommended sections:
-
-1. Capture
-2. Source
-3. Triage hints
+If multiple Inbox candidates exist, ask one concise question before moving files.
 
 ## Organizing Inbox
 
@@ -86,4 +62,3 @@ Inbox is temporary. A note leaves Inbox only when one primary home is clear.
 - Attachments go to the asset-reference route.
 - Reusable scaffolds go to the template-note route.
 - System, archive, or recovery items go to the system-archive route.
-

@@ -21,7 +21,7 @@ Preferred signals:
 - Headings or content that define folder placement, metadata, MOC behavior, or note creation rules
 - Stable filenames for operating or metadata rules
 
-Use operating rules as the source of truth for folder placement, Inbox fallback, and MOC behavior. Use metadata rules for frontmatter vocabulary and examples. If multiple active rule documents conflict, stop and ask before writing.
+Use operating rules as the source of truth for folder placement and MOC behavior. Use metadata rules for frontmatter vocabulary and examples. If multiple active rule documents conflict, stop and ask before writing.
 
 ## Resolve Placement
 
@@ -43,7 +43,7 @@ For normal learning folders, a folder should be either:
 
 Do not mix normal notes and subfolders under the same folder. If a leaf folder needs to become more granular, move its existing notes into appropriate child leaf folders before treating it as a branch folder.
 
-Follow active operating rules for exceptions. Common exceptions are taxonomy, MOC, index, archive, attachment, template, and Inbox areas.
+Follow active operating rules for exceptions. Common exceptions are taxonomy, MOC, index, archive, attachment, and template areas.
 
 ## Ambiguity Handling
 
@@ -56,7 +56,7 @@ Use metadata and dynamic MOCs for secondary axes. Do not move a note into a fold
 - project where the question arose
 - application domain that is not the primary learning question
 
-If placement remains unclear, use the vault's Inbox rule only when saving now is more important than resolving taxonomy immediately. Mark the note as needing review and include a placement reason if the active metadata rules support that field.
+If placement remains unclear, ask one concise question before writing. Do not use Inbox as a fallback for new notes.
 
 ## Anti-Drift Rules
 
@@ -66,4 +66,3 @@ If placement remains unclear, use the vault's Inbox rule only when saving now is
 - Do not assume a folder still exists; inspect the current tree.
 - Do not assume a folder can accept notes just because it exists; check whether it is a branch folder with subfolders.
 - Do not assume a dated metadata rule file is still current.
-
