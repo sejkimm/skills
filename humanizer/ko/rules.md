@@ -1,44 +1,27 @@
----
-name: humanizer-ko
-description: |
-  한국어 텍스트에서 AI가 생성한 흔적을 제거하고 자연스러운 문체로 다듬는 skill.
-  한국어 문서, 블로그, 보고서, 기술 문서 등을 편집하거나 리뷰할 때 사용한다.
-  다음과 같은 패턴을 감지하고 수정한다: 과장된 의미 부여, 홍보성 어투,
-  LLM 특유의 과격한 어휘, 모호한 출처 표기, 연결어미 남발, 3개 나열 패턴,
-  부정 대구문, 영어 기술 용어의 불필요한 한글 음역,
-  기술 시스템 묘사의 의인화 및 증상-원인 혼동 등.
-  한국어와 영어가 섞인 텍스트에도 적용 가능하다.
-allowed-tools:
-  - Read
-  - Write
-  - Edit
-  - Grep
-  - Glob
-  - AskUserQuestion
----
-
-# Humanizer-KO: 한국어 AI 문체 교정
+# Korean Humanizer Rules
 
 한국어 텍스트에서 AI가 생성한 흔적을 찾아 자연스러운 문체로 다듬는 편집 가이드다. 영어권의 Wikipedia "Signs of AI writing" 가이드를 기반으로 하되, 한국어 문법과 문체에 맞게 재구성했다.
 
-이 skill은 entry point 파일과 reference 파일들로 구성된다. 본 SKILL.md는 작업 흐름과 출력 형식만 담고, 상세 패턴과 예시는 별도 파일로 분리되어 있다. 작업 시 입력 텍스트의 성격에 맞는 reference만 읽으면 된다.
+이 파일은 한국어 라우트의 작업 흐름과 출력 형식만 담는다. 상세 패턴과 예시는 별도 파일로 분리되어 있다. 작업 시 입력 텍스트의 성격에 맞는 reference만 읽으면 된다.
 
 
 ## 폴더 구조
 
 ```
-humanizer-ko/
-├── SKILL.md                       # 본 파일 (entry point)
-├── patterns/
-│   ├── 01-content.md              # 1-6번: 내용 패턴
-│   ├── 02-vocabulary.md           # 7-13번: 어휘 패턴
-│   ├── 03-style.md                # 14-17번: 문체 패턴
-│   ├── 04-conversation.md         # 18-20번: 대화 패턴
-│   ├── 05-verbosity.md            # 21-23번: 군더더기와 회피
-│   └── 06-technical-terms.md      # 24번: 기술 용어 패턴
-└── examples/
-    ├── example-1-general.md       # 일반 콘텐츠 (블로그, 보고서)
-    └── example-2-technical.md     # 기술 문서 (사례 A: 의인화/증상-원인, 사례 B: 메타 서술/표준 주장)
+humanizer/
+├── SKILL.md                       # 라우터
+└── ko/
+    ├── rules.md                   # 본 파일
+    ├── patterns/
+    │   ├── 01-content.md          # 1-6번: 내용 패턴
+    │   ├── 02-vocabulary.md       # 7-13번: 어휘 패턴
+    │   ├── 03-style.md            # 14, 17번: 문체 패턴
+    │   ├── 04-conversation.md     # 18-20번: 대화 패턴
+    │   ├── 05-verbosity.md        # 21-23번: 군더더기와 회피
+    │   └── 06-technical-terms.md  # 24번: 기술 용어 패턴
+    └── examples/
+        ├── example-1-general.md   # 일반 콘텐츠 (블로그, 보고서)
+        └── example-2-technical.md # 기술 문서
 ```
 
 
@@ -48,12 +31,14 @@ humanizer-ko/
 |---|---|---|---|
 | 내용 패턴 | `patterns/01-content.md` | 1-6 | 과장된 의미 부여, 미디어 보도 강조, 연결어미 남발, 홍보성 어투, 모호한 출처, 과제와 전망 공식 |
 | 어휘 패턴 | `patterns/02-vocabulary.md` | 7, 7-1, 7-2, 7-3, 8, 9, 9-1, 10, 11, 11-1, 12, 13 | LLM 과장 어휘, 의인화/증상-원인, 영어 형용사+하다, 단정적 표준 주장, 등호 패턴, LLM 어휘, 도입어, 부정 대구문, 나열 |
-| 문체 패턴 | `patterns/03-style.md` | 14-17 | 줄표/쉼표 남용, 굵은 글씨 남용, 인라인 헤더 목록, 이모지 |
+| 문체 패턴 | `patterns/03-style.md` | 14, 17 | 줄표/쉼표 남용, 이모지 |
 | 대화 패턴 | `patterns/04-conversation.md` | 18, 18-1, 19, 20 | 챗봇 잔재, 메타 서술, 학습 데이터 면책, 아첨 |
 | 군더더기 | `patterns/05-verbosity.md` | 21, 22, 23, 23-1 | 군더더기 표현, 과도한 유보, 막연한 결론, 공허한 단정 |
 | 기술 용어 | `patterns/06-technical-terms.md` | 24 | 영어 기술 용어 음역 |
 
 작업 전에 모든 reference를 다 읽을 필요는 없다. 입력 텍스트의 성격에 따라 관련 카테고리만 읽는다. 텍스트 유형이 명확하지 않거나 처음 사용할 때는 모든 카테고리를 훑어본다.
+
+형식만의 정리는 선택 사항이다. 굵은 강조나 목록 앞 라벨은 사용자가 요청했거나 대상 문서의 스타일 가이드가 요구할 때만 고친다. 단, 이모지 장식, 챗봇 잔재, 홍보성 문구, 억지 3개 나열과 함께 나타나는 경우에는 해당 활성 패턴의 일부로 다룬다.
 
 
 ## 작업 순서

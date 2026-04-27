@@ -176,9 +176,9 @@ restructure the entire chapter order and framing around that reader's journey:
    don't spend a chapter explaining what an agent is. Compress prerequisites and
    expand the parts that change their practice.
 
-### Pass 3: Humanizer-KO Integration (Korean guides only)
+### Pass 3: Humanizer Korean Rules (Korean guides only)
 
-When revising Korean-language guides, apply humanizer-ko patterns during the rewrite
+When revising Korean-language guides, apply `humanizer/ko` patterns during the rewrite
 rather than as a separate post-processing step. The key patterns to watch for:
 
 **Tone and register:**
@@ -199,7 +199,7 @@ rather than as a separate post-processing step. The key patterns to watch for:
 - Technical terms in English: React, Kubernetes, Sharpe ratio, PGR
 - Korean loanwords that are fully naturalized: 서버, 데이터, 프로그램
 
-**How supplements interact with humanizer-ko:** Supplement boxes should be written in
+**How supplements interact with humanizer Korean rules:** Supplement boxes should be written in
 the same natural voice as the rest of the guide. Don't switch to a more formal or
 explanatory register inside supplements — they should feel like the author leaning in
 to clarify, not a textbook footnote.
