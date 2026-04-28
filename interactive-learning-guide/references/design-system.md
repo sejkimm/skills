@@ -1,5 +1,9 @@
 # Design System Reference
 
+> Renderer maintenance only. Normal guide creation should use `references/catalog.md` and
+> produce a semantic `interactive-learning-guide/v1` JSON envelope. The renderer now owns
+> CSS and code block whitespace; do not copy this CSS into guide outputs by hand.
+
 This document defines the complete visual design system for interactive learning guides.
 Every guide must use these exact values to maintain visual consistency.
 

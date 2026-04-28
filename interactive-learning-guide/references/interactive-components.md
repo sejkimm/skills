@@ -1,5 +1,9 @@
 # Interactive Components Reference
 
+> Renderer maintenance only. Normal guide creation should use `references/catalog.md` and
+> produce a semantic `interactive-learning-guide/v1` JSON envelope. The renderer now builds
+> these HTML structures and interactions; do not hand-write them in guide outputs.
+
 This document defines the HTML structure and JavaScript behavior for all interactive
 elements in a learning guide.
 

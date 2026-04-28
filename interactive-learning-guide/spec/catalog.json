@@ -1,0 +1,177 @@
+{
+  "version": "interactive-learning-guide/v1",
+  "envelope": {
+    "a2ui_version": "0.9",
+    "required": ["a2ui_version", "catalog", "parts"],
+    "root_component": "ilg/LearningGuide"
+  },
+  "components": {
+    "ilg/LearningGuide": {
+      "description": "Root container for a single interactive learning guide.",
+      "children": "required",
+      "props": {
+        "title": { "type": "string", "required": true },
+        "subtitle": { "type": "string" },
+        "language": { "type": "string", "enum": ["en", "ko"], "default": "en" }
+      }
+    },
+    "ilg/Chapter": {
+      "description": "A navigable chapter with concept cards and a quiz.",
+      "children": "required",
+      "props": {
+        "id": { "type": "string", "required": true, "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "title": { "type": "string", "required": true },
+        "lead": { "type": "string" }
+      }
+    },
+    "ilg/ConceptCard": {
+      "description": "Expandable concept card inside a chapter.",
+      "children": "required",
+      "props": {
+        "number": { "type": "number", "required": true },
+        "title": { "type": "string", "required": true },
+        "brief": { "type": "string" }
+      }
+    },
+    "ilg/Prose": {
+      "description": "Markdown paragraph block.",
+      "children": "forbidden",
+      "props": {
+        "markdown": { "type": "string", "required": true }
+      }
+    },
+    "ilg/Analogy": {
+      "description": "Everyday analogy that makes an abstract concept concrete.",
+      "children": "forbidden",
+      "props": {
+        "body": { "type": "string", "required": true },
+        "title": { "type": "string" }
+      }
+    },
+    "ilg/Supplement": {
+      "description": "Clarifying note placed immediately after a sentence or paragraph.",
+      "children": "forbidden",
+      "props": {
+        "body": { "type": "string", "required": true }
+      }
+    },
+    "ilg/Highlight": {
+      "description": "Pedagogical emphasis box.",
+      "children": "forbidden",
+      "props": {
+        "body": { "type": "string", "required": true },
+        "tone": { "type": "string", "enum": ["primary", "warn", "info"], "default": "primary" },
+        "title": { "type": "string" }
+      }
+    },
+    "ilg/CodeBlock": {
+      "description": "Single code snippet rendered by the guide renderer.",
+      "children": "forbidden",
+      "props": {
+        "lang": { "type": "string", "required": true },
+        "code": { "type": "string", "required": true },
+        "filename": { "type": "string" },
+        "highlight": { "type": "array", "items": { "type": "number" } }
+      }
+    },
+    "ilg/AnnotatedCode": {
+      "description": "Code block with side annotations keyed by line number.",
+      "children": "forbidden",
+      "props": {
+        "lang": { "type": "string", "required": true },
+        "code": { "type": "string", "required": true },
+        "filename": { "type": "string" },
+        "annotations": {
+          "type": "array",
+          "required": true,
+          "items": {
+            "type": "object",
+            "props": {
+              "line": { "type": "number", "required": true },
+              "title": { "type": "string", "required": true },
+              "body": { "type": "string", "required": true }
+            }
+          }
+        }
+      }
+    },
+    "ilg/DataTable": {
+      "description": "Comparison or evidence table.",
+      "children": "forbidden",
+      "props": {
+        "columns": {
+          "type": "array",
+          "required": true,
+          "items": {
+            "type": "object",
+            "props": {
+              "key": { "type": "string", "required": true },
+              "label": { "type": "string", "required": true },
+              "align": { "type": "string", "enum": ["left", "center", "right"] }
+            }
+          }
+        },
+        "rows": { "type": "array", "required": true, "items": { "type": "object" } },
+        "caption": { "type": "string" }
+      }
+    },
+    "ilg/Diagram": {
+      "description": "Inline SVG diagram. Use sparingly for custom teaching diagrams.",
+      "children": "forbidden",
+      "props": {
+        "svg": { "type": "string", "required": true },
+        "caption": { "type": "string" }
+      }
+    },
+    "ilg/FlowChart": {
+      "description": "Simple directed teaching flow.",
+      "children": "forbidden",
+      "props": {
+        "nodes": {
+          "type": "array",
+          "required": true,
+          "items": {
+            "type": "object",
+            "props": {
+              "id": { "type": "string", "required": true },
+              "label": { "type": "string", "required": true },
+              "tag": { "type": "string" }
+            }
+          }
+        },
+        "edges": {
+          "type": "array",
+          "required": true,
+          "items": {
+            "type": "object",
+            "props": {
+              "from": { "type": "string", "required": true },
+              "to": { "type": "string", "required": true },
+              "label": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "ilg/Quiz": {
+      "description": "Chapter comprehension check.",
+      "children": "forbidden",
+      "props": {
+        "id": { "type": "string", "required": true, "pattern": "^[a-z0-9][a-z0-9-]*$" },
+        "question": { "type": "string", "required": true },
+        "options": {
+          "type": "array",
+          "required": true,
+          "items": {
+            "type": "object",
+            "props": {
+              "label": { "type": "string", "required": true },
+              "correct": { "type": "boolean", "required": true }
+            }
+          }
+        },
+        "explanation": { "type": "string", "required": true }
+      }
+    }
+  }
+}
