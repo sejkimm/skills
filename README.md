@@ -29,8 +29,9 @@
 
 - following [agentskills.io](https://agentskills.io)
 
-- This folder can be easily integrated with codex by creating a symlink.
+- This folder can be integrated with Codex and Claude by creating symlinks.
 
     ``` shell
-    ln -s $(this folder) ~/.codex
+    ln -s $(this folder) ~/.codex/skills
+    ln -s $(this folder) ~/.claude/skills
     ```
