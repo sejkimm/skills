@@ -2,7 +2,7 @@
 
 ## Baseline
 
-Use the smallest frontmatter that supports retrieval and provenance.
+Use the smallest explicitly allowed frontmatter.
 
 ```yaml
 ---
@@ -12,9 +12,11 @@ summary: ""
 ---
 ```
 
-Add route-specific fields only when the route reference asks for them or when they clearly help retrieval.
+Write only properties explicitly named by the selected route, active vault rules, or the user's direct request. Do not add properties merely because they seem useful for retrieval, provenance, routing, or lifecycle clarity.
 
 ## Shared Fields
+
+These fields are available only when explicitly allowed by the selected route, active vault rules, or the user's direct request.
 
 | Field | Use |
 |---|---|
@@ -42,9 +44,8 @@ references:
     url: "https://example.com"
 ```
 
-Keep source details in the body unless a vault-local rule requires specific properties.
+Keep source details in the body unless a vault-local rule explicitly requires specific properties.
 
 ## Assistant
 
 Use `assistant` only for provenance, never as topic or category metadata. If the model is unknown, omit the field rather than guessing.
-

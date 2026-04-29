@@ -18,7 +18,8 @@ The skill must stay portable. It must not encode a private vault snapshot, absol
 Always read:
 
 1. `references/privacy-and-portability.md`
-2. `references/router.md`
+2. `references/obsidian-cli.md`
+3. `references/router.md`
 
 Then read only the selected route reference.
 
@@ -44,16 +45,17 @@ If two routes remain equally plausible after reading the router rules, ask one c
 
 - Classify by operational role before topic.
 - Give each normal note exactly one physical home.
+- Use Obsidian CLI for vault inspection and mutations. If the CLI is unavailable or returns an error, stop the vault operation and report the error; do not use filesystem fallback.
 - Use vault-local active rules at runtime instead of hardcoding a folder map.
 - Do not create new notes in Inbox. If a new note's destination is unknown, ask one concise question before writing instead of saving to Inbox.
 - If the user explicitly asks to create, save, or capture a new note in Inbox, ask for a non-Inbox destination or route.
 - When organizing Inbox, full-scan the Inbox tree before moving or rewriting anything.
 - Preserve source context for source-first notes; do not force them into durable learning notes.
 - Promote notes between routes only when the note's role changes, not merely because the topic overlaps.
-- Use frontmatter only when it improves retrieval, provenance, routing, or lifecycle clarity.
+- Write only explicitly allowed frontmatter properties: fields required by the selected route, active vault rules, or the user's direct request. Do not invent optional properties.
 - Do not manually edit Dataview or MOC files unless the user explicitly asks for curated MOC handling.
 - Do not write private local paths, personal metadata, or inspection counts into generated notes unless the user explicitly asks for a local-environment note.
 
 ## Output Standard
 
-Write a note or routing recommendation, not a transcript. Preserve the reusable conclusion, source, context, limits, and relevant links according to the selected route. Verify the file exists and the frontmatter is valid whenever writing a file.
+Write a note or routing recommendation, not a transcript. Preserve the reusable conclusion, source, context, limits, and relevant links according to the selected route. Verify writes through Obsidian CLI. If CLI verification fails, stop and report the error. Leave no validation artifacts behind.

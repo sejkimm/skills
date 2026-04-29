@@ -22,7 +22,7 @@ If a close note exists, ask whether to merge, append, or create a more specific 
 
 ## Frontmatter
 
-Use the active metadata rules as the vocabulary source. At minimum, include the fields required by the vault's current rules.
+Use the active metadata rules as the vocabulary source. Include only the fields required by the vault's current rules, the selected route, or the user's direct request.
 
 If no stricter active rule exists, use this baseline:
 
@@ -37,7 +37,7 @@ summary: "One sentence that explains what this note is for."
 
 Use `status` only for exception states such as `needs-review` or `deprecated`, unless active local rules require normal lifecycle values.
 
-Add optional metadata only when it improves retrieval or provenance:
+Add additional metadata only when the active metadata rules or user explicitly allow the property name:
 
 ```yaml
 domains:
@@ -56,7 +56,7 @@ also_relevant:
   - <secondary-primary-lens-if-supported>
 ```
 
-Do not repeat the primary lens in `domains`. `domains` is an application or context axis, not the physical home.
+Do not repeat the primary lens in `domains`. `domains` is an application or context axis, not the physical home. If `domains` is not explicitly allowed, omit it.
 
 ## Assistant Naming
 

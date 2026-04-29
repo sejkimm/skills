@@ -32,7 +32,7 @@ Verify:
 - The file exists.
 - Required frontmatter fields are present.
 - `primary`, when required, uses the active metadata vocabulary.
-- Optional metadata is useful and not decorative.
+- Every written property is explicitly allowed by active metadata rules, the selected route, or the user's direct request.
 - `assistant`, when present, uses canonical naming from active rules.
 - `references`, when present, is an Obsidian-compatible list of URLs or vault links.
 - The note was not written into a branch folder that already contains subfolders, unless the active rules explicitly allow that folder type.
@@ -48,4 +48,3 @@ This skill may be published. Keep it portable:
 - Do not encode one user's vault folder map into the skill.
 - Use generic route examples and placeholders.
 - Keep personal operating decisions in the vault's canonical rule documents, not in the public skill.
-

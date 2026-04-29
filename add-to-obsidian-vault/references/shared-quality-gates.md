@@ -5,6 +5,7 @@
 Confirm:
 
 - The target vault is identified by the current workspace or explicit user context.
+- Obsidian CLI availability was checked.
 - The selected route is clear.
 - The destination folder exists or the user explicitly asked to create it.
 - The note has one physical home.
@@ -31,10 +32,12 @@ Stop and ask one concise question if:
 
 Verify:
 
-- The file exists.
+- Obsidian CLI confirms the file exists.
+- Obsidian CLI readback or inspection confirms the write.
 - Frontmatter is valid YAML.
 - Required route-specific fields are present.
-- Optional metadata is useful, not decorative.
+- Every written property is explicitly allowed by the selected route, active vault rules, or the user's direct request.
 - Links are source URLs or likely valid vault links.
 - No private absolute path was written by accident.
+- No temporary validation file or marker remains in the vault.
 - No MOC or index file was edited unless the user asked for curated MOC handling.
