@@ -6,15 +6,18 @@ description: >
   user asks to "explain a project", "help me understand this codebase", "create a learning
   guide", "make an interactive tutorial", "visualize how something works", or wants a deep-dive
   walkthrough. Also trigger when the user says things like "기초부터 이해하고 싶어요",
-  "step by step으로 알려주세요", or asks for an "interactive explanation". The guide is produced
-  through a Hyperscribe-style semantic JSON envelope rendered into a self-contained HTML file.
+  "step by step으로 알려주세요", or asks for an "interactive explanation".
 ---
 
 # Interactive Learning Guide
 
 Build a self-contained interactive HTML guide from a semantic JSON envelope. The model emits
 teaching structure and content only; `scripts/render.mjs` validates the envelope and owns HTML,
-CSS, JS, layout, code block whitespace, chapter navigation, expandable cards, and quizzes.
+CSS, JS, layout, code block whitespace, wiki sidebar navigation, document sections, and quizzes.
+The visual template is wiki-like: sidebar chapter navigation, article-style content, and one
+accent gradient progress bar. The active chapter shows its section links in the sidebar; inactive
+chapters stay collapsed. Each chapter ends with sharp previous/next navigation buttons. Do not add
+extra gradient ornaments.
 
 Do not hand-write the final HTML unless you are changing the renderer itself.
 
@@ -38,12 +41,14 @@ For codebases:
 - Read key source files before planning.
 - Identify the core modules, data flow, control flow, and user-facing workflow.
 - Note which concepts are prerequisites for others.
+- Identify the target reader, learning objectives, and prerequisite knowledge.
 
 For general topics:
 
 - Identify what the reader must understand first.
 - Map the concept dependency graph.
 - Decide what can be compressed because the user likely already knows it.
+- State the target reader, learning objectives, and prerequisites before chapters.
 
 ### 2. Plan Chapters
 
@@ -73,7 +78,10 @@ Canonical shape:
       "props": {
         "title": "Guide title",
         "subtitle": "Short scope statement",
-        "language": "en"
+        "language": "en",
+        "audience": "Who this guide is for",
+        "objectives": ["What the reader should be able to do"],
+        "prerequisites": ["What the reader should already know"]
       },
       "children": []
     }
@@ -84,19 +92,25 @@ Canonical shape:
 Rules:
 
 - Emit semantic data only. Never include `style`, `className`, colors, fonts, spacing, or layout props.
-- Use `ilg/Chapter` for navigation units and `ilg/ConceptCard` for expandable explanations.
+- Use `audience`, `objectives`, and `prerequisites` to make the guide's learning contract explicit.
+- Use `ilg/Chapter` for sidebar navigation units and `ilg/ConceptCard` for document sections.
 - Use `ilg/CodeBlock` or `ilg/AnnotatedCode` for real source code. Put raw code in the `code`
   prop; the renderer handles escaping and whitespace.
 - Use `ilg/FlowChart`, `ilg/DataTable`, `ilg/Diagram`, `ilg/Highlight`, `ilg/Analogy`, and
   `ilg/Supplement` where they teach better than prose.
+- Prefer renderer-owned structured diagrams such as `ilg/FlowChart` over Mermaid or raw SVG.
+  Mermaid and arbitrary SVG are escape hatches only when the structure cannot be expressed with
+  catalog components.
 - Every quiz must have exactly one correct option.
 
 ### 4. Render and Validate
 
-Render by invoking the Node script directly:
+Render by invoking the Node script directly. Paths below are relative to this skill's
+directory (the directory containing this `SKILL.md`); resolve them to absolute paths before
+running.
 
 ```bash
-node /Users/sejkimm/dev/project/l1/skills/interactive-learning-guide/scripts/render.mjs \
+node ./scripts/render.mjs \
   --in /absolute/path/to/guide.json \
   --out /absolute/path/to/guide.html
 ```
@@ -104,7 +118,7 @@ node /Users/sejkimm/dev/project/l1/skills/interactive-learning-guide/scripts/ren
 Validation-only:
 
 ```bash
-node /Users/sejkimm/dev/project/l1/skills/interactive-learning-guide/scripts/render.mjs \
+node ./scripts/render.mjs \
   --in /absolute/path/to/guide.json \
   --validate-only
 ```
@@ -117,11 +131,13 @@ Do not silently fall back to hand-written HTML.
 Open or inspect the generated HTML. For substantial visual changes, use a browser/screenshot
 check. Confirm:
 
-- Chapter buttons switch chapters.
+- Sidebar chapter links switch chapters.
 - Progress bar updates.
-- Concept cards expand and collapse.
+- The sidebar active state follows the selected chapter and only that chapter's section links are visible.
+- Previous/next chapter buttons switch chapters and use sharp corners.
 - Quizzes reveal the correct answer and explanation.
 - Code snippets preserve indentation.
+- Flow chart labels remain inside the rendered diagram area.
 
 ## Writing Content That Teaches
 
@@ -129,6 +145,8 @@ check. Confirm:
 - Prefer concrete examples over broad background.
 - Show real code for codebase guides.
 - Use diagrams for flow, architecture, state, and relationships.
+- Keep diagrams bounded: prefer 3-6 nodes per `ilg/FlowChart`, short node labels, and multiple
+  smaller diagrams over one wide diagram.
 - Use `ilg/Highlight` sparingly for points worth remembering.
 - Use `ilg/Analogy` only when it makes an abstract idea easier to reason about.
 - Use `ilg/Supplement` immediately after a sentence or paragraph that may block the reader.
@@ -150,7 +168,7 @@ If the user names a reader persona, reorder the guide around that reader's journ
 
 1. Start from the reader's actual entry point.
 2. Reorder chapters by the reader's needs, not the source material's order.
-3. Weave domain mapping into each concept card.
+3. Weave domain mapping into each concept section.
 4. Cut prerequisites the reader already knows.
 
 ### Pass 3: Korean Humanizer Rules
@@ -185,5 +203,5 @@ renderer styling or interaction behavior. Normal guide creation should use `refe
 When changing renderer behavior, add or update focused tests under `tests/` and run:
 
 ```bash
-node --test /Users/sejkimm/dev/project/l1/skills/interactive-learning-guide/tests/*.test.mjs
+node --test ./tests/*.test.mjs
 ```

@@ -46,21 +46,54 @@ function renderGuide(root) {
   const language = props.language || "en";
   const title = escapeHtml(props.title);
   const subtitle = props.subtitle ? `<p class="sub">${escapeHtml(props.subtitle)}</p>` : "";
+  const guideFrame = renderGuideFrame(props, language);
   const initialProgress = chapters.length > 0 ? 100 / chapters.length : 0;
   const nav = chapters.map((chapter, index) => {
     const active = index === 0 ? " active" : "";
-    const chapterTitle = chapter.props?.title || `Chapter ${index + 1}`;
-    return `<button class="ch-btn${active}" type="button" onclick="go(${index})">${escapeHtml(chapterTitle)}</button>`;
+    const chapterTitle = normalizeChapterTitle(chapter.props?.title || `Chapter ${index + 1}`);
+    const sections = chapterSections(chapter, chapter.props?.id).map(section => {
+      return `<a class="side-sublink" href="#${escapeAttr(section.id)}">${escapeHtml(section.title)}</a>`;
+    }).join("");
+    return `<div class="side-chapter${active}"><button class="side-link${active}" type="button" onclick="go(${index})"><span>${index + 1}</span>${escapeHtml(chapterTitle)}</button><div class="side-subnav">${sections}</div></div>`;
   }).join("");
   const body = chapters.map((chapter, index) => {
-    return renderTree(chapter, { language, chapterIndex: index, totalChapters: chapters.length });
+    const chapterId = chapter.props?.id || `chapter-${index + 1}`;
+    return renderTree(chapter, { language, chapterId, chapterIndex: index, totalChapters: chapters.length });
   }).join("");
 
   return buildDocument({
     language,
     title: props.title,
-    body: `<div class="wrap"><h1>${title}</h1>${subtitle}<div class="progress-bar"><div class="progress-fill" id="progress" style="width:${initialProgress}%"></div></div><nav class="chapters" aria-label="Chapters">${nav}</nav>${body}</div>`
+    body: `<div class="wiki-shell"><aside class="wiki-sidebar"><div class="sidebar-title">${title}</div><nav class="sidebar-nav" aria-label="Chapters">${nav}</nav></aside><main class="wiki-main"><div class="accent-progress"><div class="accent-progress-fill" id="progress" style="width:${initialProgress}%"></div></div><header class="wiki-header"><h1>${title}</h1>${subtitle}${guideFrame}</header>${body}</main></div>`
   });
+}
+
+function renderGuideFrame(props, language) {
+  const blocks = [];
+  if (props.audience) {
+    blocks.push(renderFrameBlock(label(language, "Audience", "대상"), `<p>${escapeHtml(props.audience)}</p>`));
+  }
+  if (Array.isArray(props.objectives) && props.objectives.length > 0) {
+    blocks.push(renderFrameBlock(label(language, "Objectives", "목표"), renderList(props.objectives)));
+  }
+  if (Array.isArray(props.prerequisites) && props.prerequisites.length > 0) {
+    blocks.push(renderFrameBlock(label(language, "Prerequisites", "선수 지식"), renderList(props.prerequisites)));
+  }
+  if (blocks.length === 0) return "";
+  return `<section class="guide-frame" aria-label="${escapeAttr(label(language, "Guide frame", "학습 범위"))}">${blocks.join("")}</section>`;
+}
+
+function renderFrameBlock(title, body) {
+  return `<div class="frame-block"><span class="frame-label">${escapeHtml(title)}</span>${body}</div>`;
+}
+
+function renderList(items) {
+  const listItems = items.map(item => `<li>${escapeHtml(item)}</li>`).join("");
+  return `<ul>${listItems}</ul>`;
+}
+
+function label(language, en, ko) {
+  return language === "ko" ? ko : en;
 }
 
 function renderTree(node, ctx = {}) {
@@ -69,22 +102,55 @@ function renderTree(node, ctx = {}) {
     throw new Error(`No renderer for component: ${node.component}`);
   }
   const children = Array.isArray(node.children) ? node.children : [];
-  const renderChildren = () => children.map(child => renderTree(child, ctx)).join("");
+  const renderChildren = () => children.map((child, index) => {
+    return renderTree(child, { ...ctx, childIndex: index });
+  }).join("");
   return renderer(node.props || {}, renderChildren, ctx);
 }
 
 function Chapter(props, renderChildren, ctx) {
   const active = ctx.chapterIndex === 0 ? " active" : "";
   const lead = props.lead ? `<p>${escapeHtml(props.lead)}</p>` : "";
-  const next = ctx.chapterIndex < ctx.totalChapters - 1
-    ? `<button class="next-ch" type="button" onclick="go(${ctx.chapterIndex + 1})">Next Chapter</button>`
-    : "";
-  return `<section class="chapter${active}" id="${escapeAttr(props.id)}"><div class="intro-box"><span class="chapter-kicker">Chapter ${ctx.chapterIndex + 1} of ${ctx.totalChapters}</span><h2>${escapeHtml(props.title)}</h2>${lead}</div>${renderChildren()}${next}</section>`;
+  return `<section class="chapter${active}" id="${escapeAttr(props.id)}"><div class="chapter-heading"><h2>${escapeHtml(normalizeChapterTitle(props.title))}</h2>${lead}</div>${renderChildren()}${chapterNav(ctx)}</section>`;
 }
 
-function ConceptCard(props, renderChildren) {
-  const brief = props.brief ? `<span class="brief">${escapeHtml(props.brief)}</span>` : "";
-  return `<article class="concept"><button class="concept-head" type="button" onclick="toggleConcept(this)" aria-expanded="false"><span class="arrow" aria-hidden="true">&#9654;</span><span class="num">${escapeHtml(props.number)}</span><h3>${escapeHtml(props.title)}</h3>${brief}</button><div class="concept-body">${renderChildren()}</div></article>`;
+function chapterNav(ctx) {
+  const previous = ctx.chapterIndex > 0
+    ? `<button class="chapter-nav-btn" type="button" onclick="go(${ctx.chapterIndex - 1})">Previous</button>`
+    : `<button class="chapter-nav-btn" type="button" disabled>Previous</button>`;
+  const next = ctx.chapterIndex < ctx.totalChapters - 1
+    ? `<button class="chapter-nav-btn" type="button" onclick="go(${ctx.chapterIndex + 1})">Next</button>`
+    : `<button class="chapter-nav-btn" type="button" disabled>Next</button>`;
+  return `<nav class="chapter-nav" aria-label="Chapter navigation">${previous}${next}</nav>`;
+}
+
+function ConceptCard(props, renderChildren, ctx) {
+  const brief = props.brief ? `<p class="section-brief">${escapeHtml(props.brief)}</p>` : "";
+  const sectionId = sectionAnchor(ctx.chapterId, props.number);
+  return `<section class="wiki-section" id="${escapeAttr(sectionId)}"><div class="section-number">${escapeHtml(props.number)}</div><div class="section-copy"><h3>${escapeHtml(props.title)}</h3>${brief}<div class="wiki-section-body">${renderChildren()}</div></div></section>`;
+}
+
+function chapterSections(chapter, chapterId) {
+  const id = chapterId || "chapter";
+  const children = Array.isArray(chapter.children) ? chapter.children : [];
+  return children
+    .filter(child => child?.component === "ilg/ConceptCard")
+    .map(child => ({
+      id: sectionAnchor(id, child.props?.number),
+      title: child.props?.title || `Section ${child.props?.number || ""}`.trim()
+    }));
+}
+
+function sectionAnchor(chapterId, number) {
+  return `${chapterId}-section-${number || 1}`;
+}
+
+function normalizeChapterTitle(value) {
+  const raw = String(value ?? "").trim();
+  const cleaned = raw
+    .replace(/^\s*chapter\s+\d+\s*(?:of\s+\d+)?\s*[:.\-–—]?\s*/i, "")
+    .trim();
+  return cleaned || raw;
 }
 
 function Prose(props) {
@@ -146,12 +212,16 @@ function Diagram(props) {
 }
 
 function FlowChart(props) {
-  const width = Math.max(560, props.nodes.length * 180);
-  const height = 190;
+  const nodeWidth = 132;
+  const width = Math.max(560, props.nodes.length * 210);
+  const height = 220;
   const positions = new Map();
   const gap = width / (props.nodes.length + 1);
   props.nodes.forEach((node, index) => {
-    positions.set(node.id, { x: gap * (index + 1), y: 82, node });
+    const labelLines = wrapText(node.label, 18, 3);
+    const tagLines = node.tag ? wrapText(node.tag, 22, 2) : [];
+    const nodeHeight = Math.max(62, 24 + (labelLines.length * 14) + (tagLines.length * 12));
+    positions.set(node.id, { x: gap * (index + 1), y: 104, node, labelLines, tagLines, nodeHeight });
   });
   const edges = props.edges.map(edge => {
     const from = positions.get(edge.from);
@@ -159,16 +229,84 @@ function FlowChart(props) {
     if (!from || !to) return "";
     const midX = (from.x + to.x) / 2;
     const label = edge.label
-      ? `<text x="${midX}" y="52" text-anchor="middle" fill="#787878" font-size="11">${escapeHtml(edge.label)}</text>`
+      ? renderSvgText(wrapText(edge.label, 20, 2), {
+        x: midX,
+        y: 52,
+        className: "flow-edge-label",
+        fill: "#787878",
+        fontSize: 11,
+        lineHeight: 13
+      })
       : "";
-    return `<path d="M ${from.x + 58} ${from.y} L ${to.x - 58} ${to.y}" stroke="#787878" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>${label}`;
+    return `<path d="M ${from.x + (nodeWidth / 2)} ${from.y} L ${to.x - (nodeWidth / 2)} ${to.y}" stroke="#787878" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/>${label}`;
   }).join("");
   const nodes = props.nodes.map(node => {
     const pos = positions.get(node.id);
-    const tag = node.tag ? `<text x="${pos.x}" y="${pos.y + 30}" text-anchor="middle" fill="#787878" font-size="10">${escapeHtml(node.tag)}</text>` : "";
-    return `<g><rect x="${pos.x - 58}" y="${pos.y - 26}" width="116" height="52" rx="8" fill="#141414" stroke="#333333"/><text x="${pos.x}" y="${pos.y + 4}" text-anchor="middle" fill="#e8e8e8" font-size="12" font-weight="700">${escapeHtml(node.label)}</text>${tag}</g>`;
+    const label = renderSvgText(pos.labelLines, {
+      x: pos.x,
+      y: pos.y - ((pos.labelLines.length - 1) * 7),
+      className: "flow-label",
+      fill: "#e8e8e8",
+      fontSize: 12,
+      fontWeight: 700,
+      lineHeight: 14
+    });
+    const tag = pos.tagLines.length > 0
+      ? renderSvgText(pos.tagLines, {
+        x: pos.x,
+        y: pos.y + 25,
+        className: "flow-tag",
+        fill: "#787878",
+        fontSize: 10,
+        lineHeight: 12
+      })
+      : "";
+    return `<g><rect x="${pos.x - (nodeWidth / 2)}" y="${pos.y - (pos.nodeHeight / 2)}" width="${nodeWidth}" height="${pos.nodeHeight}" rx="0" fill="#141414" stroke="#333333"/>${label}${tag}</g>`;
   }).join("");
   return `<div class="dia"><svg class="flow-svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="Flow chart"><defs><marker id="arrow" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#787878"/></marker></defs>${edges}${nodes}</svg></div>`;
+}
+
+function renderSvgText(lines, options) {
+  const attrs = [
+    `class="${escapeAttr(options.className)}"`,
+    `x="${options.x}"`,
+    `y="${options.y}"`,
+    "text-anchor=\"middle\"",
+    `fill="${escapeAttr(options.fill)}"`,
+    `font-size="${options.fontSize}"`
+  ];
+  if (options.fontWeight) attrs.push(`font-weight="${options.fontWeight}"`);
+  const tspans = lines.map((line, index) => {
+    const dy = index === 0 ? 0 : options.lineHeight;
+    return `<tspan x="${options.x}" dy="${dy}">${escapeHtml(line)}</tspan>`;
+  }).join("");
+  return `<text ${attrs.join(" ")}>${tspans}</text>`;
+}
+
+function wrapText(value, maxChars, maxLines) {
+  const words = String(value ?? "").trim().split(/\s+/).filter(Boolean);
+  if (words.length === 0) return [""];
+
+  const lines = [];
+  let current = "";
+  for (const word of words) {
+    const next = current ? `${current} ${word}` : word;
+    if (next.length <= maxChars) {
+      current = next;
+      continue;
+    }
+    if (current) lines.push(current);
+    current = word.length > maxChars ? `${word.slice(0, maxChars - 3)}...` : word;
+  }
+  if (current) lines.push(current);
+
+  if (lines.length <= maxLines) return lines;
+  const limited = lines.slice(0, maxLines);
+  const last = limited[limited.length - 1];
+  limited[limited.length - 1] = last.length > maxChars - 3
+    ? `${last.slice(0, maxChars - 3)}...`
+    : `${last}...`;
+  return limited;
 }
 
 function Quiz(props, _renderChildren, ctx) {

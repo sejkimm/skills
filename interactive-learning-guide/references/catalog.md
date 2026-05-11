@@ -16,7 +16,10 @@ The guide renderer accepts an A2UI-style JSON envelope. The model emits semantic
       "props": {
         "title": "Guide title",
         "subtitle": "Short scope statement",
-        "language": "en"
+        "language": "en",
+        "audience": "Who this guide is for",
+        "objectives": ["What the reader should be able to do"],
+        "prerequisites": ["What the reader should already know"]
       },
       "children": []
     }
@@ -29,6 +32,8 @@ Rules:
 - `parts` must contain exactly one root component.
 - The root component must be `ilg/LearningGuide`.
 - Props carry semantic data only. Do not use `style`, `className`, color, font, spacing, or layout props.
+- Use `audience`, `objectives`, and `prerequisites` when they clarify reader fit.
+- Prefer structured catalog diagrams over Mermaid or raw SVG so the renderer can enforce bounds.
 - Container components use `children`; leaf components omit `children`.
 - Unknown props fail validation.
 
@@ -43,12 +48,17 @@ Props:
 - `title` string, required
 - `subtitle` string, optional
 - `language` `"en" | "ko"`, optional, default `"en"`
+- `audience` string, optional
+- `objectives` string array, optional
+- `prerequisites` string array, optional
 
 Children: `ilg/Chapter[]`.
 
 ### `ilg/Chapter`
 
-Navigable chapter. The renderer creates the top chapter buttons and progress bar.
+Navigable chapter. The renderer creates sidebar chapter links, one accent progress bar, and a
+collapsed section outline for inactive chapters. It also renders sharp previous/next controls at
+the bottom of each chapter.
 
 Props:
 
@@ -60,7 +70,8 @@ Children: usually 3-6 `ilg/ConceptCard` components followed by one `ilg/Quiz`.
 
 ### `ilg/ConceptCard`
 
-Expandable concept card. Put the "why" first, then examples, code, diagrams, or checks.
+Document section in the rendered wiki template. The title becomes a sublink under the active
+chapter in the sidebar. Put the "why" first, then examples, code, diagrams, or checks.
 
 Props:
 
@@ -140,7 +151,9 @@ Props:
 
 ### `ilg/Diagram`
 
-Inline SVG diagram. Prefer `ilg/FlowChart` when a simple directed flow is enough.
+Inline SVG escape hatch. Prefer `ilg/FlowChart` when a simple directed flow is enough. Use this
+only for vetted SVG with its own `viewBox`; arbitrary Mermaid exports and text-heavy SVGs often
+break the document width or overflow labels.
 
 Props:
 
@@ -149,7 +162,8 @@ Props:
 
 ### `ilg/FlowChart`
 
-Simple left-to-right directed flow.
+Simple left-to-right directed flow. The renderer wraps long node and edge labels into bounded
+SVG text. Keep flows small; split complex diagrams into multiple flow charts.
 
 Props:
 
@@ -182,7 +196,10 @@ Exactly one option must have `correct: true`; the renderer throws a loud error o
       "props": {
         "title": "Renderer Guide",
         "subtitle": "A semantic learning guide",
-        "language": "en"
+        "language": "en",
+        "audience": "Engineers learning the renderer contract",
+        "objectives": ["Explain why the envelope exists"],
+        "prerequisites": ["Basic JSON"]
       },
       "children": [
         {

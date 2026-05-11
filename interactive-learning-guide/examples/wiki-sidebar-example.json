@@ -1,0 +1,160 @@
+{
+  "a2ui_version": "0.9",
+  "catalog": "interactive-learning-guide/v1",
+  "is_task_complete": true,
+  "parts": [
+    {
+      "component": "ilg/LearningGuide",
+      "props": {
+        "title": "Interactive Guide Renderer",
+        "subtitle": "A compact example of the wiki sidebar template",
+        "language": "en",
+        "audience": "Skill authors who need a readable generated guide",
+        "objectives": [
+          "Separate semantic guide content from presentation",
+          "Use sidebar chapters for document-style navigation",
+          "Keep accent color restrained"
+        ],
+        "prerequisites": [
+          "Basic JSON",
+          "Basic HTML structure"
+        ]
+      },
+      "children": [
+        {
+          "component": "ilg/Chapter",
+          "props": {
+            "id": "semantic-envelope",
+            "title": "Semantic Envelope",
+            "lead": "Start with stable meaning. The renderer should decide how that meaning appears."
+          },
+          "children": [
+            {
+              "component": "ilg/ConceptCard",
+              "props": {
+                "number": 1,
+                "title": "Content is not layout",
+                "brief": "The JSON describes teaching intent."
+              },
+              "children": [
+                {
+                  "component": "ilg/Prose",
+                  "props": {
+                    "markdown": "The model writes **what the reader should learn**, not CSS or hand-authored HTML.\n\n- Chapters define the reading path\n- Sections define the concepts\n- Components keep examples, tables, code, and checks structured"
+                  }
+                },
+                {
+                  "component": "ilg/Highlight",
+                  "props": {
+                    "body": "The visual system can change without rewriting the educational content.",
+                    "tone": "info",
+                    "title": "Renderer boundary"
+                  }
+                }
+              ]
+            },
+            {
+              "component": "ilg/Quiz",
+              "props": {
+                "id": "semantic-envelope-check",
+                "question": "Where should spacing, layout, and sidebar behavior live?",
+                "options": [
+                  { "label": "Inside the renderer", "correct": true },
+                  { "label": "Inside arbitrary envelope props", "correct": false }
+                ],
+                "explanation": "The envelope carries semantic content. The renderer owns presentation and interaction."
+              }
+            }
+          ]
+        },
+        {
+          "component": "ilg/Chapter",
+          "props": {
+            "id": "wiki-template",
+            "title": "Wiki Template",
+            "lead": "The page reads like documentation: sidebar navigation, focused article sections, and restrained emphasis."
+          },
+          "children": [
+            {
+              "component": "ilg/ConceptCard",
+              "props": {
+                "number": 2,
+                "title": "Sidebar over chips",
+                "brief": "Navigation is persistent."
+              },
+              "children": [
+                {
+                  "component": "ilg/Prose",
+                  "props": {
+                    "markdown": "The sidebar makes the chapter map visible without turning every chapter into a pill-shaped control. The only gradient is the progress bar at the top of the article area."
+                  }
+                },
+                {
+                  "component": "ilg/DataTable",
+                  "props": {
+                    "columns": [
+                      { "key": "area", "label": "Area" },
+                      { "key": "choice", "label": "Template choice" }
+                    ],
+                    "rows": [
+                      { "area": "Navigation", "choice": "Left sidebar links" },
+                      { "area": "Content", "choice": "Document sections" },
+                      { "area": "Accent", "choice": "Single gradient progress bar" }
+                    ],
+                    "caption": "Current template boundaries"
+                  }
+                },
+                {
+                  "component": "ilg/FlowChart",
+                  "props": {
+                    "nodes": [
+                      {
+                        "id": "envelope",
+                        "label": "Semantic envelope",
+                        "tag": "meaning"
+                      },
+                      {
+                        "id": "renderer",
+                        "label": "Renderer owned visual constraints",
+                        "tag": "layout and wrapping"
+                      },
+                      {
+                        "id": "html",
+                        "label": "Bounded wiki article output",
+                        "tag": "self-contained HTML"
+                      }
+                    ],
+                    "edges": [
+                      {
+                        "from": "envelope",
+                        "to": "renderer",
+                        "label": "validate"
+                      },
+                      {
+                        "from": "renderer",
+                        "to": "html",
+                        "label": "render safely"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "component": "ilg/Quiz",
+              "props": {
+                "id": "wiki-template-check",
+                "question": "Why keep the gradient to one bar?",
+                "options": [
+                  { "label": "It preserves identity without overwhelming the guide", "correct": true },
+                  { "label": "It makes every component look more important", "correct": false }
+                ],
+                "explanation": "A single accent bar gives continuity while keeping the page closer to a reference document."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

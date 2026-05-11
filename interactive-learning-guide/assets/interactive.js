@@ -1,6 +1,6 @@
 function go(idx) {
   const chapters = document.querySelectorAll(".chapter");
-  const buttons = document.querySelectorAll(".ch-btn");
+  const buttons = document.querySelectorAll(".side-link");
   const totalChapters = chapters.length;
 
   chapters.forEach((chapter, i) => {
@@ -8,6 +8,10 @@ function go(idx) {
   });
   buttons.forEach((button, i) => {
     button.classList.toggle("active", i === idx);
+    const group = button.closest(".side-chapter");
+    if (group) {
+      group.classList.toggle("active", i === idx);
+    }
   });
 
   const progress = document.getElementById("progress");
@@ -16,14 +20,6 @@ function go(idx) {
   }
 
   window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function toggleConcept(button) {
-  const concept = button.closest(".concept");
-  if (concept) {
-    concept.classList.toggle("open");
-    button.setAttribute("aria-expanded", concept.classList.contains("open") ? "true" : "false");
-  }
 }
 
 function checkQuiz(btn, result, id) {

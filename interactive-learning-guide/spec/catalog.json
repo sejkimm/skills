@@ -12,7 +12,10 @@
       "props": {
         "title": { "type": "string", "required": true },
         "subtitle": { "type": "string" },
-        "language": { "type": "string", "enum": ["en", "ko"], "default": "en" }
+        "language": { "type": "string", "enum": ["en", "ko"], "default": "en" },
+        "audience": { "type": "string" },
+        "objectives": { "type": "array", "items": { "type": "string" } },
+        "prerequisites": { "type": "array", "items": { "type": "string" } }
       }
     },
     "ilg/Chapter": {
@@ -116,7 +119,7 @@
       }
     },
     "ilg/Diagram": {
-      "description": "Inline SVG diagram. Use sparingly for custom teaching diagrams.",
+      "description": "Inline SVG escape hatch for vetted diagrams with a viewBox.",
       "children": "forbidden",
       "props": {
         "svg": { "type": "string", "required": true },
@@ -124,7 +127,7 @@
       }
     },
     "ilg/FlowChart": {
-      "description": "Simple directed teaching flow.",
+      "description": "Simple directed teaching flow with renderer-wrapped labels.",
       "children": "forbidden",
       "props": {
         "nodes": {

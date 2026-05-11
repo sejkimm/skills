@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Guide Renderer</title>
+<style>
 :root {
   --bg: #0a0a0a;
   --bg2: #101010;
@@ -548,3 +555,55 @@ code {
   .annotated { grid-template-columns: 1fr; }
   .dia svg { min-width: 480px; }
 }
+
+</style>
+</head>
+<body>
+<div class="wiki-shell"><aside class="wiki-sidebar"><div class="sidebar-title">Interactive Guide Renderer</div><nav class="sidebar-nav" aria-label="Chapters"><div class="side-chapter active"><button class="side-link active" type="button" onclick="go(0)"><span>1</span>Semantic Envelope</button><div class="side-subnav"><a class="side-sublink" href="#semantic-envelope-section-1">Content is not layout</a></div></div><div class="side-chapter"><button class="side-link" type="button" onclick="go(1)"><span>2</span>Wiki Template</button><div class="side-subnav"><a class="side-sublink" href="#wiki-template-section-2">Sidebar over chips</a></div></div></nav></aside><main class="wiki-main"><div class="accent-progress"><div class="accent-progress-fill" id="progress" style="width:50%"></div></div><header class="wiki-header"><h1>Interactive Guide Renderer</h1><p class="sub">A compact example of the wiki sidebar template</p><section class="guide-frame" aria-label="Guide frame"><div class="frame-block"><span class="frame-label">Audience</span><p>Skill authors who need a readable generated guide</p></div><div class="frame-block"><span class="frame-label">Objectives</span><ul><li>Separate semantic guide content from presentation</li><li>Use sidebar chapters for document-style navigation</li><li>Keep accent color restrained</li></ul></div><div class="frame-block"><span class="frame-label">Prerequisites</span><ul><li>Basic JSON</li><li>Basic HTML structure</li></ul></div></section></header><section class="chapter active" id="semantic-envelope"><div class="chapter-heading"><h2>Semantic Envelope</h2><p>Start with stable meaning. The renderer should decide how that meaning appears.</p></div><section class="wiki-section" id="semantic-envelope-section-1"><div class="section-number">1</div><div class="section-copy"><h3>Content is not layout</h3><p class="section-brief">The JSON describes teaching intent.</p><div class="wiki-section-body"><div class="prose"><p>The model writes <strong>what the reader should learn</strong>, not CSS or hand-authored HTML.</p><ul><li>Chapters define the reading path</li><li>Sections define the concepts</li><li>Components keep examples, tables, code, and checks structured</li></ul></div><div class="highlight highlight-info"><span class="box-label">Renderer boundary</span><p>The visual system can change without rewriting the educational content.</p></div></div></div></section><div class="quiz"><h4>Check Your Understanding</h4><p>Where should spacing, layout, and sidebar behavior live?</p><button class="quiz-opt" type="button" data-result="correct" onclick="checkQuiz(this,'correct','semantic-envelope-check')">A. Inside the renderer</button><button class="quiz-opt" type="button" data-result="wrong" onclick="checkQuiz(this,'wrong','semantic-envelope-check')">B. Inside arbitrary envelope props</button><div class="quiz-explain" id="semantic-envelope-check">The envelope carries semantic content. The renderer owns presentation and interaction.</div></div><nav class="chapter-nav" aria-label="Chapter navigation"><button class="chapter-nav-btn" type="button" disabled>Previous</button><button class="chapter-nav-btn" type="button" onclick="go(1)">Next</button></nav></section><section class="chapter" id="wiki-template"><div class="chapter-heading"><h2>Wiki Template</h2><p>The page reads like documentation: sidebar navigation, focused article sections, and restrained emphasis.</p></div><section class="wiki-section" id="wiki-template-section-2"><div class="section-number">2</div><div class="section-copy"><h3>Sidebar over chips</h3><p class="section-brief">Navigation is persistent.</p><div class="wiki-section-body"><div class="prose"><p>The sidebar makes the chapter map visible without turning every chapter into a pill-shaped control. The only gradient is the progress bar at the top of the article area.</p></div><div class="tbl-wrap"><table class="tbl"><caption>Current template boundaries</caption><thead><tr><th style="text-align:left">Area</th><th style="text-align:left">Template choice</th></tr></thead><tbody><tr><td style="text-align:left">Navigation</td><td style="text-align:left">Left sidebar links</td></tr><tr><td style="text-align:left">Content</td><td style="text-align:left">Document sections</td></tr><tr><td style="text-align:left">Accent</td><td style="text-align:left">Single gradient progress bar</td></tr></tbody></table></div><div class="dia"><svg class="flow-svg" viewBox="0 0 630 220" role="img" aria-label="Flow chart"><defs><marker id="arrow" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#787878"/></marker></defs><path d="M 223.5 104 L 249 104" stroke="#787878" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/><text class="flow-edge-label" x="236.25" y="52" text-anchor="middle" fill="#787878" font-size="11"><tspan x="236.25" dy="0">validate</tspan></text><path d="M 381 104 L 406.5 104" stroke="#787878" stroke-width="1.5" marker-end="url(#arrow)" fill="none"/><text class="flow-edge-label" x="393.75" y="52" text-anchor="middle" fill="#787878" font-size="11"><tspan x="393.75" dy="0">render safely</tspan></text><g><rect x="91.5" y="73" width="132" height="62" rx="0" fill="#141414" stroke="#333333"/><text class="flow-label" x="157.5" y="104" text-anchor="middle" fill="#e8e8e8" font-size="12" font-weight="700"><tspan x="157.5" dy="0">Semantic envelope</tspan></text><text class="flow-tag" x="157.5" y="129" text-anchor="middle" fill="#787878" font-size="10"><tspan x="157.5" dy="0">meaning</tspan></text></g><g><rect x="249" y="72" width="132" height="64" rx="0" fill="#141414" stroke="#333333"/><text class="flow-label" x="315" y="97" text-anchor="middle" fill="#e8e8e8" font-size="12" font-weight="700"><tspan x="315" dy="0">Renderer owned</tspan><tspan x="315" dy="14">visual constraints</tspan></text><text class="flow-tag" x="315" y="129" text-anchor="middle" fill="#787878" font-size="10"><tspan x="315" dy="0">layout and wrapping</tspan></text></g><g><rect x="406.5" y="72" width="132" height="64" rx="0" fill="#141414" stroke="#333333"/><text class="flow-label" x="472.5" y="97" text-anchor="middle" fill="#e8e8e8" font-size="12" font-weight="700"><tspan x="472.5" dy="0">Bounded wiki</tspan><tspan x="472.5" dy="14">article output</tspan></text><text class="flow-tag" x="472.5" y="129" text-anchor="middle" fill="#787878" font-size="10"><tspan x="472.5" dy="0">self-contained HTML</tspan></text></g></svg></div></div></div></section><div class="quiz"><h4>Check Your Understanding</h4><p>Why keep the gradient to one bar?</p><button class="quiz-opt" type="button" data-result="correct" onclick="checkQuiz(this,'correct','wiki-template-check')">A. It preserves identity without overwhelming the guide</button><button class="quiz-opt" type="button" data-result="wrong" onclick="checkQuiz(this,'wrong','wiki-template-check')">B. It makes every component look more important</button><div class="quiz-explain" id="wiki-template-check">A single accent bar gives continuity while keeping the page closer to a reference document.</div></div><nav class="chapter-nav" aria-label="Chapter navigation"><button class="chapter-nav-btn" type="button" onclick="go(0)">Previous</button><button class="chapter-nav-btn" type="button" disabled>Next</button></nav></section></main></div>
+<script>
+function go(idx) {
+  const chapters = document.querySelectorAll(".chapter");
+  const buttons = document.querySelectorAll(".side-link");
+  const totalChapters = chapters.length;
+
+  chapters.forEach((chapter, i) => {
+    chapter.classList.toggle("active", i === idx);
+  });
+  buttons.forEach((button, i) => {
+    button.classList.toggle("active", i === idx);
+    const group = button.closest(".side-chapter");
+    if (group) {
+      group.classList.toggle("active", i === idx);
+    }
+  });
+
+  const progress = document.getElementById("progress");
+  if (progress && totalChapters > 0) {
+    progress.style.width = `${((idx + 1) / totalChapters) * 100}%`;
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function checkQuiz(btn, result, id) {
+  const quiz = btn.closest(".quiz");
+  if (!quiz || quiz.dataset.answered) return;
+
+  quiz.dataset.answered = "true";
+  quiz.querySelectorAll(".quiz-opt").forEach(option => {
+    if (option.dataset.result === "correct") {
+      option.classList.add("correct");
+    } else if (option === btn) {
+      option.classList.add("wrong");
+    }
+  });
+
+  const explanation = document.getElementById(id);
+  if (explanation) {
+    explanation.style.display = "block";
+  }
+}
+
+</script>
+</body>
+</html>
