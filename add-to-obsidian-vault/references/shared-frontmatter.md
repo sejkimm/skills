@@ -27,6 +27,26 @@ These fields are available only when explicitly allowed by the selected route, a
 | `references` | List of source URLs or vault links |
 | `assistant` | AI model or assistant that materially helped write, summarize, translate, or structure the note |
 
+## Date
+
+Use `date` for the note creation time or artifact capture time.
+
+When creating a new note, capture the timestamp exactly once immediately before the Obsidian CLI write. Use the macOS host local system time from the same execution context used for Obsidian CLI:
+
+```bash
+date '+%Y-%m-%d %H:%M'
+```
+
+Write that value unchanged to frontmatter:
+
+```yaml
+date: YYYY-MM-DD HH:mm
+```
+
+Do not use the source publication date, model current date, sandbox/container time, file creation time, Obsidian Linter timestamp, or Templater timestamp as the frontmatter `date`.
+
+After writing, verify the saved `date` value through Obsidian CLI readback or property inspection. If the saved value differs from the captured timestamp, stop and report the mismatch.
+
 ## References
 
 Use a list of URLs or vault links:
