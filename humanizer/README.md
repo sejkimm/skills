@@ -51,6 +51,8 @@ The required rules focus on patterns that commonly make text sound generated:
 - sycophantic tone
 - filler, hedging, and generic conclusions
 - Korean-specific technical-term, personification, and register issues
+- Korean translationese, formal-noun overuse, mechanical layout formulas, and
+  sentence-rhythm uniformity
 
 Pure formatting cleanup, such as heavy emphasis or label-led bullet items, is
 optional. Apply it only when requested, required by the target style guide, or
@@ -64,5 +66,9 @@ structure.
   the MIT License. Original copyright notice: Copyright (c) 2025 Siqi Chen.
 - Korean humanizer rules were originally maintained in this repository as
   `humanizer-ko` and are now merged into this `humanizer` skill.
+- Korean translationese, severity, and over-polish guard ideas are adapted from
+  [epoko77-ai/im-not-ai](https://github.com/epoko77-ai/im-not-ai), distributed
+  under the MIT License. Original copyright notice: Copyright (c) 2026
+  epoko77-ai.
 - [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
 - [WikiProject AI Cleanup](https://en.wikipedia.org/wiki/Wikipedia:WikiProject_AI_Cleanup)
