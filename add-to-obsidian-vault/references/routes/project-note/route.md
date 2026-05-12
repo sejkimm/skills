@@ -27,9 +27,12 @@ status: active
 project: ""
 references:
   - https://example.com/source
+reference_created: YYYY-MM-DD
 summary: ""
 ---
 ```
+
+Use `reference_created` only when the note has one primary referenced document with a clear authored, published, posted, or last materially updated date.
 
 ## Body
 
@@ -47,4 +50,3 @@ Recommended sections:
 - Keep the project-specific framing in the project route.
 - Keep original career assignments in the career route unless the work becomes independent.
 - Keep source-first material in the source-note route and link to it if needed.
-

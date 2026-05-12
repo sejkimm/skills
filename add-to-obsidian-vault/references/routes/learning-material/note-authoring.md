@@ -35,6 +35,8 @@ summary: "One sentence that explains what this note is for."
 ---
 ```
 
+Keep reference publication or reference-authored dates separate as `reference_created` when explicitly allowed and clearly known.
+
 Use `status` only for exception states such as `needs-review` or `deprecated`, unless active local rules require normal lifecycle values.
 
 Add additional metadata only when the active metadata rules or user explicitly allow the property name:
@@ -52,6 +54,7 @@ assistant:
   - <assistant-or-model-name>
 references:
   - https://example.com/source
+reference_created: YYYY-MM-DD
 also_relevant:
   - <secondary-primary-lens-if-supported>
 ```
@@ -74,6 +77,8 @@ Use `references` only as a list of URLs or vault links:
 references:
   - https://example.com/source
 ```
+
+Use `reference_created` only for one clear primary reference date. If there are multiple references with different dates, keep those dates in the body beside the relevant reference descriptions.
 
 Do not use nested reference objects. Do not add source detail properties by default. If the note really needs source explanation, put it in the body as natural language rather than expanding frontmatter.
 

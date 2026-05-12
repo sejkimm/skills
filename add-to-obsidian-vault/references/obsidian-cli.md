@@ -28,10 +28,10 @@ Use Obsidian's macOS `obsidian` command for vault-aware inspection and changes.
 
 1. Identify the target vault and selected route.
 2. Check destination folders and likely duplicates through CLI inspection.
-3. For new notes with a `date` field, capture the macOS host local timestamp immediately before writing with `date '+%Y-%m-%d %H:%M'`.
+3. For new notes with a creation timestamp field, capture the host-local timestamp immediately before writing. Follow the timestamp rules in `references/shared-frontmatter.md`; do not rely on container-default UTC when the vault lives on a host with a different timezone.
 4. Create, move, rename, delete, or update through CLI.
 5. Read back or inspect the result through CLI.
-6. Validate frontmatter, including the captured `date` value when present, and links using the generated file content.
+6. Validate frontmatter, including the captured creation timestamp value when present, and links using the generated file content.
 7. If CLI verification fails or cannot answer a required question, stop and report the blocker. Do not continue through filesystem fallback.
 
 ## Temporary Validation

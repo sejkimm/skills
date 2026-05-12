@@ -29,10 +29,11 @@ summary: ""
 ---
 ```
 
+Use `reference_created` only when indexing one referenced source asset with a clear authored, published, posted, or last materially updated date.
+
 ## Outlier Handling
 
 - Generated standalone guides can remain assets if they are not normal notes.
 - Source PDFs tied to one note should be linked from that note.
 - Career assignment files should stay with the career artifact.
 - Course datasets and notebooks should stay with the course unless they become independent projects.
-

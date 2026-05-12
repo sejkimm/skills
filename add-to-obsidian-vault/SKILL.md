@@ -19,7 +19,8 @@ Always read:
 
 1. `references/privacy-and-portability.md`
 2. `references/obsidian-cli.md`
-3. `references/router.md`
+3. `references/shared-frontmatter.md`
+4. `references/router.md`
 
 Then read only the selected route reference.
 

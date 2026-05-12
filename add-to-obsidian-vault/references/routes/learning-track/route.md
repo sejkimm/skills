@@ -27,11 +27,14 @@ status: active
 track: ""
 references:
   - https://example.com/course
+reference_created: YYYY-MM-DD
 summary: ""
 ---
 ```
 
 Use `certification-note`, `challenge-note`, or `language-note` when more specific.
+
+Use `reference_created` only when the course page, lecture, assignment, or source document has one clear authored, published, posted, or last materially updated date.
 
 ## Body
 
@@ -49,4 +52,3 @@ Prefer a progress-oriented structure:
 - Keep course dumps, notebooks, datasets, and quizzes in this route while they remain course-bound.
 - Move company-specific interview preparation to the career route.
 - Move independent implementation work to the project route.
-

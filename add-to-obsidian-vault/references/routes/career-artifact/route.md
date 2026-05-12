@@ -30,9 +30,12 @@ role: ""
 year: YYYY
 references:
   - https://example.com/source
+reference_created: YYYY-MM-DD
 summary: ""
 ---
 ```
+
+Use `reference_created` only for the referenced posting, assignment, or official document date when it is clearly known.
 
 For sensitive or official documents, frontmatter may be optional. Preserve original files as-is.
 
@@ -42,4 +45,3 @@ For sensitive or official documents, frontmatter may be optional. Preserve origi
 - Keep application-specific framing here.
 - Keep original assignment records here, even if a later independent project emerges elsewhere.
 - Keep assignment-local binary files beside the assignment when they are only useful there.
-

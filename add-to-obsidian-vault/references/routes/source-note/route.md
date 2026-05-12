@@ -26,9 +26,12 @@ type: source-note
 status: raw
 references:
   - https://example.com/source
+reference_created: YYYY-MM-DD
 summary: ""
 ---
 ```
+
+Add `reference_created` only when the source's own authored, published, posted, or last materially updated date is clearly known.
 
 Add `assistant` only if an assistant materially summarized, translated, or restructured the source.
 
@@ -49,4 +52,3 @@ Recommended sections:
 - If the note becomes a project plan, route it to the project route.
 - If the note informs a specific application or interview, route it to the career route.
 - If it is a reusable prompt scaffold, route it to the template route.
-
