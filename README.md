@@ -9,6 +9,7 @@
 - Updated: 2026.04.27 - Renamed `create-obsidian-note` to `add-to-obsidian-vault`.
 - Updated: 2026.04.27 - Merged `humanizer-ko` into `humanizer`.
 - Updated: 2026.04.28 - Added `create-structured-note` skill.
+- Updated: 2026.05.12 - Added `grill-me` skill.
 
 ## Included Skills
 
@@ -24,6 +25,7 @@
 | `autoresearch` | `./autoresearch` | Autonomous goal-directed iteration loop — modify, verify, keep/discard, repeat. Applies Karpathy's autoresearch principles to any task. | [uditgoenka/autoresearch](https://github.com/uditgoenka/autoresearch) |
 | `add-to-obsidian-vault` | `./add-to-obsidian-vault` | Add, route, classify, move, or organize notes and artifacts into the right Obsidian vault location. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/add-to-obsidian-vault) |
 | `create-structured-note` | `./create-structured-note` | Structure arbitrary content into an Obsidian-ready Markdown note in bullet-first 개조식 style. | Local Claude skill export |
+| `grill-me` | `./grill-me` | Stress-test a plan or design by interviewing the user until the decision tree is resolved. | Copied unchanged from [mattpocock/skills `skills/productivity/grill-me`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md). |
 
 ## Notes
 
