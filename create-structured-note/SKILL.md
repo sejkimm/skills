@@ -1,6 +1,6 @@
 ---
 name: create-structured-note
-description: Structure arbitrary content into a clean Obsidian-ready Markdown note in a bullet-first 개조식 style. Use this skill whenever the user asks to "정리해줘", "노트로 정리", "note 형태로", "structure this as a note", "make this into notes", "마크다운 노트로", "summarize as notes", "요약해줘", "정리해서 보여줘", or any variation that asks for content to be reorganized into a readable note. Also trigger when the user pastes raw text, links to an article, references an uploaded document, or asks for the current session content to be summarized in note form. The skill produces a top-of-note executive summary as a small bullet list, followed by topic sections that are themselves bullet-first, with nested bullets up to two levels, links preserved inline, and Korean text in 개조식 noun-ending form. Tables are used for matrix-shaped data such as comparisons and action items. Returns Markdown inline as the response, not as a saved file.
+description: Structure arbitrary content into a clean Obsidian-ready Markdown note in a bullet-first 개조식 style. Use this skill whenever the user asks to "정리해줘", "노트로 정리", "note 형태로", "structure this as a note", "make this into notes", "마크다운 노트로", "summarize as notes", "요약해줘", "정리해서 보여줘", or any variation that asks for content to be reorganized into a readable note. Also trigger when the user pastes raw text, links to an article, references an uploaded document, or asks for the current session content to be summarized in note form. The skill produces a top-of-note executive summary as a small bullet list, followed by topic sections that are themselves bullet-first, with nested bullets up to two levels, links preserved inline, and Korean text in 개조식 noun-ending form. Tables are used for matrix-shaped data such as comparisons and action items. When a dense section would be hard to reread later, the note may add a small reader-oriented explanation without imposing a repeated format. Returns Markdown inline as the response, not as a saved file.
 ---
 
 # Structured Note
@@ -18,6 +18,7 @@ The user is collecting notes for later re-reading and synthesis. The pattern the
 
 - A short executive summary at the top of the note, four to seven bullets, that captures the source's main moves in compact form.
 - Topic sections below, each headed by `##`, with their own bullet lists that go into more detail. Nested bullets up to two levels are used freely.
+- Reader guidance is allowed but should stay lightweight and selective. When a section is dense, abstract, or likely to be misunderstood, add the smallest helpful bridge: a clarifying child bullet, a short prose lead-in, or an occasional natural question-and-answer turn. Do not create a named or repeated template for this.
 
 Bullets are the default unit. Prose paragraphs are rare. Tables are used whenever the data is matrix-shaped.
 
@@ -51,6 +52,7 @@ Notes about each part:
 - The `#` title summarizes what the note is about. Use the source's own title if it is descriptive; otherwise rewrite it.
 - The 요약 section is mandatory unless the source is so short the summary would just duplicate the body. Four to seven bullets is the target. Each summary bullet should compress one major move of the source.
 - Section headings must be informative, not generic. Prefer `## 검증 중심 조직으로의 재편` over `## Section 4`.
+- Explanatory bridges are optional. Add them only when the section would otherwise be hard to understand or easy to misread. They should adapt to the local content instead of following a fixed label or fixed shape.
 - A note may end with `## References` or `## 참고` if there are external links worth pulling out. Inline links inside bullets are usually enough.
 
 ## Bullets, prose, and tables
@@ -73,8 +75,28 @@ Use a short prose paragraph only when:
 
 - The thought is genuinely continuous and bulleting would split a single argument into noise.
 - A short narrative anchors the rest of the note, such as a "Background" or "맥락" lead-in.
+- A difficult section needs one or two sentences of connective explanation before returning to bullets.
 
 Korean prose uses -합니다, -입니다, -됩니다 endings. English prose uses formal full sentences. Two to four sentences per paragraph; if you are writing more, the content probably wants to become bullets.
+
+### Reader clarity without fixed templates
+
+Use "why would this be hard to understand?" as an internal editing check, not as a required output section.
+
+Add reader-oriented explanation only when it materially improves later rereading. Good signals include:
+
+- A conclusion appears before its cause.
+- A choice or trade-off is summarized but the reason is easy to miss.
+- A technical term carries important implications that the source assumes.
+- A section compresses several steps of reasoning into one claim.
+
+When extra explanation is useful, choose the lightest form that fits the section:
+
+- Add a child bullet that names the missing reason.
+- Add a short prose bridge before the bullet list.
+- Add a natural question bullet only when the question itself is useful for recall.
+
+Avoid making every dense section look the same. Do not add a visible "why" heading, a repeated Q&A block, or a fixed reason-answer-template unless the user explicitly asks for that format.
 
 ### Tables are the default for matrix-shaped data
 
