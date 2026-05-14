@@ -27,7 +27,8 @@ This skill routes text to the right language-specific humanizer rules.
 
 ## Formatting Cleanup
 
-Do not treat heavy bold emphasis or label-led bullet lists as required AI-writing
-signals by default. Clean them only when the user asks, the target style guide
-requires it, or they are part of another active issue such as chatbot artifacts,
-emoji decoration, promotional copy, or repetitive rule-of-three structure.
+Do not treat normal Markdown emphasis or label-led bullet lists as required
+AI-writing signals by default. Clean them only when the user asks, the target
+style guide requires it, or they are part of another active issue such as
+chatbot artifacts, emoji decoration, promotional copy, or repetitive
+rule-of-three structure.
