@@ -20,7 +20,8 @@ Always read:
 1. `references/privacy-and-portability.md`
 2. `references/obsidian-cli.md`
 3. `references/shared-frontmatter.md`
-4. `references/router.md`
+4. `references/shared-markdown-format.md`
+5. `references/router.md`
 
 Then read only the selected route reference.
 
@@ -59,4 +60,4 @@ If two routes remain equally plausible after reading the router rules, ask one c
 
 ## Output Standard
 
-Write a note or routing recommendation, not a transcript. Preserve the reusable conclusion, source, context, limits, and relevant links according to the selected route. Verify writes through Obsidian CLI. If CLI verification fails, stop and report the error. Leave no validation artifacts behind.
+Write a note or routing recommendation, not a transcript. Preserve the reusable conclusion, source, context, limits, and relevant links according to the selected route. Apply the shared Markdown body formatting rules before writing. Verify writes through Obsidian CLI. If CLI verification fails, stop and report the error. Leave no validation artifacts behind.

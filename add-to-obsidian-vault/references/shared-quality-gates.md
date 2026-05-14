@@ -38,6 +38,7 @@ Verify:
 - Required route-specific fields are present.
 - Every written property is explicitly allowed by the selected route, active vault rules, or the user's direct request.
 - Links are source URLs or likely valid vault links.
+- Markdown body list indentation follows `references/shared-markdown-format.md`.
 - No private absolute path was written by accident.
 - No temporary validation file or marker remains in the vault.
 - No MOC or index file was edited unless the user asked for curated MOC handling.
