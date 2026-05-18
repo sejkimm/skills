@@ -1,6 +1,6 @@
 ---
 name: create-structured-note
-description: Structure arbitrary content into a clean Obsidian-ready Markdown note in a bullet-first 개조식 style. Use this skill whenever the user asks to "정리해줘", "노트로 정리", "note 형태로", "structure this as a note", "make this into notes", "마크다운 노트로", "summarize as notes", "요약해줘", "정리해서 보여줘", or any variation that asks for content to be reorganized into a readable note. Also trigger when the user pastes raw text, links to an article, references an uploaded document, or asks for the current session content to be summarized in note form. The skill produces a top-of-note executive summary as a small bullet list, followed by topic sections that are themselves bullet-first, with nested bullets up to two levels, links preserved inline, and Korean text in 개조식 noun-ending form. Tables are used for matrix-shaped data such as comparisons and action items. When a dense section would be hard to reread later, the note may add a small reader-oriented explanation without imposing a repeated format. Returns Markdown inline as the response, not as a saved file.
+description: Use when the user asks to reorganize raw text, links, uploaded documents, or session content into a readable Markdown note, including requests like "정리해줘", "노트로 정리", "note 형태로", "structure this as a note", "make this into notes", "마크다운 노트로", "summarize as notes", "요약해줘", or "정리해서 보여줘".
 ---
 
 # Structured Note
