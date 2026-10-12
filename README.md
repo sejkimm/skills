@@ -12,19 +12,21 @@
 - Updated: 2026.05.12 - Added `grill-me` skill.
 - Updated: 2026.10.12 - Added `anatomy` skill.
 - Updated: 2026.10.12 - Removed `ui-ux-pro-max`, `interactive-learning-guide`, `doc-rewriter`, and `ralph-codex-orchestrator` skills.
+- Updated: 2026.10.12 - Updated `superpowers` to v7.0.0 and `autoresearch` to v2.2.2, and replaced `grill-me` with `grilling`.
 
 ## Included Skills
 
 | skill name | folder dir | description | original github url |
 | --- | --- | --- | --- |
-| `humanizer` | `./humanizer` | Remove signs of AI-generated writing from English or Korean text and rewrite it to sound more natural. | English rules copied/adapted from [blader/humanizer](https://github.com/blader/humanizer) under the MIT License, Copyright (c) 2025 Siqi Chen; Korean rules from the former `humanizer-ko` in this repo. |
-| `superpowers` | `./superpowers` | Complete software development workflow for coding agents with composable skills and process guardrails. | [obra/superpowers](https://github.com/obra/superpowers) |
-| `consulting-style-deck` | `./consulting-style-deck` | Build editorial, consulting-grade .pptx presentation decks in a polished strategy-firm visual style. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/consulting-style-deck) |
-| `autoresearch` | `./autoresearch` | Autonomous goal-directed iteration loop — modify, verify, keep/discard, repeat. Applies Karpathy's autoresearch principles to any task. | [uditgoenka/autoresearch](https://github.com/uditgoenka/autoresearch) |
-| `add-to-obsidian-vault` | `./add-to-obsidian-vault` | Add, route, classify, move, or organize notes and artifacts into the right Obsidian vault location. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/add-to-obsidian-vault) |
-| `create-structured-note` | `./create-structured-note` | Structure arbitrary content into an Obsidian-ready Markdown note in bullet-first 개조식 style. | Local Claude skill export |
-| `grill-me` | `./grill-me` | Stress-test a plan or design by interviewing the user until the decision tree is resolved. | Copied unchanged from [mattpocock/skills `skills/productivity/grill-me`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md). |
-| `anatomy` | `./anatomy` | Build crafted, interactive isometric SVG figures that explain a technical idea as a real physical object. | [wheresryan22/anatomy](https://github.com/wheresryan22/anatomy) under the MIT License, Copyright (c) 2026 Ryan. |
+| `humanizer` | `./humanizer` | Rewrite English or Korean text to remove AI writing patterns while keeping its meaning and voice. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/humanizer), [blader/humanizer](https://github.com/blader/humanizer) under the MIT License, Copyright (c) 2025 Siqi Chen. |
+| `superpowers` | `./superpowers` | Software development workflow skills for coding agents: brainstorming, planning, TDD, debugging, and code review. | [obra/superpowers](https://github.com/obra/superpowers) `skills` under the MIT License, Copyright (c) 2025 Jesse Vincent. |
+| `consulting-style-deck` | `./consulting-style-deck` | Build .pptx decks in an editorial consulting style with serif headlines. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/consulting-style-deck) |
+| `autoresearch` | `./autoresearch` | Run an autonomous loop that modifies, verifies, and keeps or discards changes against a metric. | [uditgoenka/autoresearch](https://github.com/uditgoenka/autoresearch) `.agents/skills/autoresearch` under the MIT License, Copyright (c) 2026 Udit Goenka. |
+| `add-to-obsidian-vault` | `./add-to-obsidian-vault` | Route notes, clips, and other artifacts to the right folder in an Obsidian vault. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/add-to-obsidian-vault) |
+| `create-structured-note` | `./create-structured-note` | Turn text, links, or documents into a bullet-first 개조식 Markdown note for Obsidian. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/create-structured-note) |
+| `codebase-pruning` | `./codebase-pruning` | Find and remove dead code, orphaned files, stale config keys, and outdated docs. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/codebase-pruning) |
+| `grilling` | `./grilling` | Question the user in rounds about a plan or decision until every branch is settled. | [mattpocock/skills](https://github.com/mattpocock/skills) `skills/productivity/grilling` under the MIT License, Copyright (c) 2026 Matt Pocock. |
+| `anatomy` | `./anatomy` | Build interactive isometric SVG figures that explain a technical idea as a physical object. | [wheresryan22/anatomy](https://github.com/wheresryan22/anatomy) under the MIT License, Copyright (c) 2026 Ryan. |
 
 ## Notes
 
