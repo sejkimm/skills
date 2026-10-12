@@ -10,6 +10,7 @@
 - Updated: 2026.04.27 - Merged `humanizer-ko` into `humanizer`.
 - Updated: 2026.04.28 - Added `create-structured-note` skill.
 - Updated: 2026.05.12 - Added `grill-me` skill.
+- Updated: 2026.10.12 - Added `anatomy` skill.
 
 ## Included Skills
 
@@ -26,6 +27,7 @@
 | `add-to-obsidian-vault` | `./add-to-obsidian-vault` | Add, route, classify, move, or organize notes and artifacts into the right Obsidian vault location. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/add-to-obsidian-vault) |
 | `create-structured-note` | `./create-structured-note` | Structure arbitrary content into an Obsidian-ready Markdown note in bullet-first 개조식 style. | Local Claude skill export |
 | `grill-me` | `./grill-me` | Stress-test a plan or design by interviewing the user until the decision tree is resolved. | Copied unchanged from [mattpocock/skills `skills/productivity/grill-me`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md). |
+| `anatomy` | `./anatomy` | Build crafted, interactive isometric SVG figures that explain a technical idea as a real physical object. | [wheresryan22/anatomy](https://github.com/wheresryan22/anatomy) under the MIT License, Copyright (c) 2026 Ryan. |
 
 ## Notes
 
