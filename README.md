@@ -1,20 +1,5 @@
 # Skills
 
-- Created: 2026.01.29
-- Updated: 2026.04.01 - Added `interactive-learning-guide` skill.
-- Updated: 2026.04.06 - Added `doc-rewriter` and `ralph-codex-orchestrator` skills.
-- Updated: 2026.04.10 - Added `consulting-style-deck` skill.
-- Updated: 2026.04.14 - Added `humanizer-ko` skill.
-- Updated: 2026.04.15 - Added `autoresearch` skill.
-- Updated: 2026.04.27 - Renamed `create-obsidian-note` to `add-to-obsidian-vault`.
-- Updated: 2026.04.27 - Merged `humanizer-ko` into `humanizer`.
-- Updated: 2026.04.28 - Added `create-structured-note` skill.
-- Updated: 2026.05.12 - Added `grill-me` skill.
-- Updated: 2026.10.12 - Added `anatomy` skill.
-- Updated: 2026.10.12 - Removed `ui-ux-pro-max`, `interactive-learning-guide`, `doc-rewriter`, and `ralph-codex-orchestrator` skills.
-- Updated: 2026.10.12 - Updated `superpowers` to v7.0.0 and `autoresearch` to v2.2.2, and replaced `grill-me` with `grilling`.
-- Updated: 2026.10.12 - Removed `codebase-pruning` skill.
-
 ## Included Skills
 
 | skill name | folder dir | description | original github url |
@@ -38,3 +23,20 @@
     ln -s $(this folder) ~/.codex/skills
     ln -s $(this folder) ~/.claude/skills
     ```
+
+## Changelog
+
+- 2026.01.29 - Created.
+- 2026.04.01 - Added `interactive-learning-guide` skill.
+- 2026.04.06 - Added `doc-rewriter` and `ralph-codex-orchestrator` skills.
+- 2026.04.10 - Added `consulting-style-deck` skill.
+- 2026.04.14 - Added `humanizer-ko` skill.
+- 2026.04.15 - Added `autoresearch` skill.
+- 2026.04.27 - Renamed `create-obsidian-note` to `add-to-obsidian-vault`.
+- 2026.04.27 - Merged `humanizer-ko` into `humanizer`.
+- 2026.04.28 - Added `create-structured-note` skill.
+- 2026.05.12 - Added `grill-me` skill.
+- 2026.10.12 - Added `anatomy` skill.
+- 2026.10.12 - Removed `ui-ux-pro-max`, `interactive-learning-guide`, `doc-rewriter`, and `ralph-codex-orchestrator` skills.
+- 2026.10.12 - Updated `superpowers` to v7.0.0 and `autoresearch` to v2.2.2, and replaced `grill-me` with `grilling`.
+- 2026.10.12 - Removed `codebase-pruning` skill.
