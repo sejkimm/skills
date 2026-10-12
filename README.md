@@ -13,6 +13,7 @@
 - Updated: 2026.10.12 - Added `anatomy` skill.
 - Updated: 2026.10.12 - Removed `ui-ux-pro-max`, `interactive-learning-guide`, `doc-rewriter`, and `ralph-codex-orchestrator` skills.
 - Updated: 2026.10.12 - Updated `superpowers` to v7.0.0 and `autoresearch` to v2.2.2, and replaced `grill-me` with `grilling`.
+- Updated: 2026.10.12 - Removed `codebase-pruning` skill.
 
 ## Included Skills
 
@@ -24,7 +25,6 @@
 | `autoresearch` | `./autoresearch` | Run an autonomous loop that modifies, verifies, and keeps or discards changes against a metric. | [uditgoenka/autoresearch](https://github.com/uditgoenka/autoresearch) `.agents/skills/autoresearch` under the MIT License, Copyright (c) 2026 Udit Goenka. |
 | `add-to-obsidian-vault` | `./add-to-obsidian-vault` | Route notes, clips, and other artifacts to the right folder in an Obsidian vault. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/add-to-obsidian-vault) |
 | `create-structured-note` | `./create-structured-note` | Turn text, links, or documents into a bullet-first 개조식 Markdown note for Obsidian. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/create-structured-note) |
-| `codebase-pruning` | `./codebase-pruning` | Find and remove dead code, orphaned files, stale config keys, and outdated docs. | [sejkimm/skills](https://github.com/sejkimm/skills/tree/main/codebase-pruning) |
 | `grilling` | `./grilling` | Question the user in rounds about a plan or decision until every branch is settled. | [mattpocock/skills](https://github.com/mattpocock/skills) `skills/productivity/grilling` under the MIT License, Copyright (c) 2026 Matt Pocock. |
 | `anatomy` | `./anatomy` | Build interactive isometric SVG figures that explain a technical idea as a physical object. | [wheresryan22/anatomy](https://github.com/wheresryan22/anatomy) under the MIT License, Copyright (c) 2026 Ryan. |
 
