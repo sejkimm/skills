@@ -18,7 +18,7 @@ The user asks to organize, sort, triage, or route existing Inbox contents.
 
 Use the vault's active Inbox if one is defined by vault-local rules.
 
-If no active Inbox is defined, ask one concise question before organizing or moving files.
+If no active Inbox is defined, report that the vault has no Inbox and stop. Do not create an Inbox.
 
 If multiple Inbox candidates exist, ask one concise question before moving files.
 
@@ -36,7 +36,7 @@ Required workflow:
 6. Assign exactly one primary route to every item: learning material, source note, learning track, career artifact, project note, asset reference, template note, system/archive, or keep in Inbox.
 7. Produce a routing plan before bulk moves unless the user explicitly asked for direct execution.
 8. When executing moves, preserve links when possible. Prefer vault-aware or Obsidian-safe moves when link preservation matters.
-9. Leave uncertain items in Inbox with `status: needs-triage` and a short triage reason.
+9. Leave uncertain items in Inbox with the review status that the active rules define. If the active rules define no review status, leave the items unchanged and list them in the report.
 
 ## Triage Output
 

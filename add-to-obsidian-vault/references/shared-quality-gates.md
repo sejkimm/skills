@@ -5,7 +5,7 @@
 Confirm:
 
 - The target vault is identified by the current workspace or explicit user context.
-- Obsidian CLI availability was checked.
+- Obsidian CLI availability was checked. If the CLI is not reachable, the host-shell fallback conditions are true.
 - The selected route is clear.
 - The destination folder exists or the user explicitly asked to create it.
 - The note has one physical home.
@@ -28,12 +28,14 @@ Stop and ask one concise question if:
 - Creating the note would silently duplicate an existing note.
 - Required route-specific rule documents are missing or conflict.
 
+In an unattended session, do not stop for an unclear placement if the active rules define a fallback. Apply the fallback and report it.
+
 ## After Writing
 
 Verify:
 
-- Obsidian CLI confirms the file exists.
-- Obsidian CLI readback or inspection confirms the write.
+- Obsidian CLI, or the host-shell fallback when its conditions are true, confirms the file exists.
+- Readback or inspection confirms the write.
 - Frontmatter is valid YAML.
 - Required route-specific fields are present.
 - Every written property is explicitly allowed by the selected route, active vault rules, or the user's direct request.

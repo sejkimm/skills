@@ -22,7 +22,7 @@ Stop and ask one concise question if any of these are true:
 - Multiple active rule documents conflict.
 - The folder tree and active rules disagree in a way that affects placement.
 - The only apparent destination would mix normal notes and subfolders under one folder without an explicit exception.
-- Two physical homes remain equally plausible after applying the ambiguity rules.
+- Two physical homes remain equally plausible after applying the ambiguity rules, and the session is interactive. In an unattended session, apply the fallback of the active rules.
 - The user appears to want a project log, archive, or temporary note rather than reusable learning material.
 
 ## After Writing
@@ -33,11 +33,21 @@ Verify:
 - Required frontmatter fields are present.
 - `primary`, when required, uses the active metadata vocabulary.
 - Every written property is explicitly allowed by active metadata rules, the selected route, or the user's direct request.
+- Every written property appears in the active field table, in the table order.
+- List values respect the caps of the active rules.
+- `primary` matches the folder level that the active rules map to `primary`.
+- Secondary-field values do not repeat `primary`, if the active rules say so.
+- `summary` describes the content and does not copy the title.
+- Open-vocabulary values reuse existing spellings.
 - `assistant`, when present, uses canonical naming from active rules.
 - `references`, when present, is an Obsidian-compatible list of URLs or vault links.
 - The note was not written into a branch folder that already contains subfolders, unless the active rules explicitly allow that folder type.
 - No private local absolute path was written unless the note is explicitly about that local environment.
-- Wikilinks point to likely existing notes, or speculative links are removed.
+- The summary is the first body section and has at most three bullets.
+- The note has no dedicated limits section unless the source is mainly about limits or the user asked for one.
+- The body follows the Writing Style rules in `note-authoring.md`.
+- Every `[^n]` reference has a definition.
+- Wikilinks point to existing notes. Key terms with an existing note are linked at first mention.
 - MOC files were not edited unless curated MOC handling was explicitly requested.
 
 ## Public-Repo Hygiene

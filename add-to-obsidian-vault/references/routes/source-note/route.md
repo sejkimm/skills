@@ -13,29 +13,35 @@ The user wants to preserve a raw source quickly: copied article, quote, thread, 
 
 ## Destination
 
-Use the vault's source-note or quick-capture area if active rules define one. If not, infer the current source-first area from folder names and note patterns at runtime. Do not add the inferred private folder map to this skill.
+1. Read the active vault rules. Find the boundary rule between the learning-material tree and the source-archive area.
+2. If the source passes the boundary rule for the learning-material tree, resolve its folder with `references/routes/learning-material/taxonomy-resolution.md`. Use the learning-material metadata rules and the source-note type value that they define.
+3. If the source does not pass, put it in the source-archive area that the active rules define.
+4. If the vault has no boundary rule, use the vault's source-note or quick-capture area. Infer it from folder names and note patterns at runtime. Do not add the inferred folder map to this skill.
 
 ## Frontmatter
 
-Use:
+Use the active metadata rules of the destination. If no active rule exists, use this baseline:
 
 ```yaml
 ---
 date: YYYY-MM-DD HH:mm
 type: source-note
-status: raw
+summary: ""
 references:
   - https://example.com/source
 reference_created: YYYY-MM-DD
-summary: ""
 ---
 ```
 
-Add `reference_created` only when the source's own authored, published, posted, or last materially updated date is clearly known.
+Do not use `status: raw`. The `source-note` type already marks a raw source. Add `status` only for an exception state that the active rules define.
+
+Add `reference_created` only when the source's own date is clearly known. Use the date format of the active rules.
 
 Add `assistant` only if an assistant materially summarized, translated, or restructured the source.
 
 ## Body
+
+If the vault defines body rules for source notes, follow them. Use the sections below only as a fallback.
 
 Preserve source context first. A source note can be rough. It does not need a complete learning-note structure.
 

@@ -21,10 +21,10 @@ These fields are available only when explicitly allowed by the selected route, a
 | Field | Use |
 |---|---|
 | `date` | Note creation time or artifact capture time; do not use for source publication dates |
-| `reference_created` | Date the primary referenced document was authored, published, posted, or last materially updated |
+| `reference_created` | Date of the primary referenced document. Use the date format of the active rules. |
 | `type` | Route-specific note type |
-| `summary` | One sentence explaining the note's purpose |
-| `status` | Only when lifecycle state matters |
+| `summary` | One sentence that describes the content of the note. Do not copy the title. |
+| `status` | Only for exception states that the active rules define. |
 | `references` | List of source URLs or vault links |
 | `assistant` | AI model or assistant that materially helped write, summarize, translate, or structure the note |
 
@@ -32,7 +32,7 @@ These fields are available only when explicitly allowed by the selected route, a
 
 Use `date` for the note creation time or artifact capture time.
 
-When creating a new note, capture the timestamp exactly once immediately before the Obsidian CLI write. Use the host local system time, not the model current date.
+When creating a new note, capture the timestamp exactly once immediately before the write. Use the host local system time, not the model current date.
 
 If the agent runs directly on the macOS host, capture:
 
@@ -63,9 +63,11 @@ date: YYYY-MM-DD HH:mm
 
 Do not use the source publication date, model current date, sandbox/container time, file creation time, Obsidian Linter timestamp, or Templater timestamp as the frontmatter creation timestamp.
 
-After writing, verify the saved creation timestamp through Obsidian CLI readback or property inspection. If the saved value differs from the captured timestamp, stop and report the mismatch.
+After writing, verify the saved creation timestamp through readback or property inspection. If the saved value differs from the captured timestamp, stop and report the mismatch.
 
 ## Reference Created
+
+If the active rules define the format, use it. The formats below are fallbacks.
 
 Use `reference_created` for the primary referenced document's authored, published, posted, or last materially updated date. This separates when the Obsidian note was created from when the referenced document itself was created.
 

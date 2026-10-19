@@ -6,7 +6,7 @@ The user wants a distilled, reusable learning note: a concept explanation, mecha
 
 ## Do Not Use This Route When
 
-- The user wants a raw clipping or source archive.
+- The user wants a raw clipping or source archive. Use the source-note route. That route can place the source in the learning-material tree when the vault boundary rule allows it.
 - The item is mainly course progress, a quiz, or a certification artifact.
 - The item is tied to one job, interview, application, or admissions process.
 - The item only makes sense inside one project.
@@ -26,5 +26,5 @@ This route is intentionally local-rule driven. Locate the active learning-materi
 
 ## Output
 
-Write a reusable note, not a transcript. Preserve the conclusion, mechanism, evidence, limits, and source links.
+Write a reusable note, not a transcript. Preserve the conclusion, mechanism, evidence, and source links.
 

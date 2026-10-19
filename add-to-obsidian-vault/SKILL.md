@@ -9,7 +9,7 @@ description: Use when the user asks to add, place, save, route, classify, move, 
 
 This skill is an Obsidian vault router. It decides what kind of vault artifact the user is adding or organizing, loads only the relevant route instructions, and then places, creates, moves, or advises on the artifact.
 
-This skill is for vault placement and lifecycle decisions. A separate `create-obsidian-note` skill can own the task of turning given text or information into an Obsidian-ready note body.
+This skill is for vault placement and lifecycle decisions. A separate `create-structured-note` skill writes Markdown notes returned in chat, not learning notes saved to the vault.
 
 The skill must stay portable. It must not encode a private vault snapshot, absolute local paths, personal folder names, file counts, real note titles, real project names, real company names, or dated inspection metadata.
 
@@ -47,17 +47,29 @@ If two routes remain equally plausible after reading the router rules, ask one c
 
 - Classify by operational role before topic.
 - Give each normal note exactly one physical home.
-- Use Obsidian CLI for vault inspection and mutations. If the CLI is unavailable or returns an error, stop the vault operation and report the error; do not use filesystem fallback.
+- Use Obsidian CLI for vault inspection and mutations when it is available. If it is not available, use the host-shell fallback in `references/obsidian-cli.md` only under its conditions. If neither is available, stop and report.
 - Use vault-local active rules at runtime instead of hardcoding a folder map.
-- Do not create new notes in Inbox. If a new note's destination is unknown, ask one concise question before writing instead of saving to Inbox.
+- Do not create new notes in Inbox. If the placement of a new note is not clear: in an interactive session, ask one concise question before writing; in an unattended session, apply the fallback of the active rules and report the note in the final output. If the active rules define no fallback, stop and report.
 - If the user explicitly asks to create, save, or capture a new note in Inbox, ask for a non-Inbox destination or route.
 - When organizing Inbox, full-scan the Inbox tree before moving or rewriting anything.
 - Preserve source context for source-first notes; do not force them into durable learning notes.
 - Promote notes between routes only when the note's role changes, not merely because the topic overlaps.
-- Write only explicitly allowed frontmatter properties: fields required by the selected route, active vault rules, or the user's direct request. Do not invent optional properties.
+- Write only explicitly allowed frontmatter properties: fields required by the selected route, active vault rules, or the user's direct request. Do not invent optional properties. If the active rules contain a complete field table, that table is the full set of allowed properties. Follow its field order, value shapes, list caps, slug format, and controlled values.
 - Do not manually edit Dataview or MOC files unless the user explicitly asks for curated MOC handling.
 - Do not write private local paths, personal metadata, or inspection counts into generated notes unless the user explicitly asks for a local-environment note.
 
+## Active Vault Rule Precedence
+
+Active vault rule documents win over the reference files of this skill on these topics:
+
+- Folder placement and folder naming.
+- The boundary between the learning-material tree and the source-archive area.
+- Frontmatter fields, field order, values, list caps, and vocabulary.
+- Review status values and the fallback for unclear placement.
+- Note body structure.
+
+The examples in the reference files are fallbacks for vaults without rules.
+
 ## Output Standard
 
-Write a note or routing recommendation, not a transcript. Preserve the reusable conclusion, source, context, limits, and relevant links according to the selected route. Apply the shared Markdown body formatting rules before writing. Verify writes through Obsidian CLI. If CLI verification fails, stop and report the error. Leave no validation artifacts behind.
+Write a note or routing recommendation, not a transcript. Preserve the reusable conclusion, source, context, and relevant links according to the selected route. Apply the shared Markdown body formatting rules before writing. Verify writes through Obsidian CLI, or through the host-shell fallback when its conditions are true. If verification fails, stop and report the error. Leave no validation artifacts behind.

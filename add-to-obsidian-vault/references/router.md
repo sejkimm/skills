@@ -38,6 +38,7 @@ Ask these in order:
 - If the user asks to sort, triage, or organize existing Inbox contents, prefer `inbox`.
 - If the user asks to create an unsorted note, temporary note, unknown-destination note, or new Inbox capture, ask for a non-Inbox destination before writing.
 - If the user says "copy", "clip", "save source", "just store this", or "no LLM", prefer `source-note`.
+- The source-note route selects the destination with the vault boundary rule. A source note can go into the learning-material tree.
 - If the user says "course", "class", "certification", "quiz", "challenge", or "cohort", prefer `learning-track`.
 - If the user says "job", "resume", "application", "interview", "assignment", "coding test", or "admissions", prefer `career-artifact`.
 - If the user names a project context and the note would not be useful outside that project, prefer `project-note`.
@@ -47,7 +48,13 @@ If two routes remain equally plausible, ask one concise question. Do not silentl
 
 ## New Note Destination Rule
 
-Do not create new notes in Inbox. A new note must resolve to a non-Inbox route and physical home before writing. If no non-Inbox destination is clear, ask one concise question instead of using Inbox as a fallback.
+Do not create new notes in Inbox. A new note must resolve to a non-Inbox route and physical home before writing.
+
+If no destination is clear:
+
+- In an interactive session, ask one concise question.
+- In an unattended session, apply the fallback of the active rules, such as the nearest leaf with a review status. Report the note in the final output.
+- If the active rules define no fallback, stop and report.
 
 ## Promotion Rule
 

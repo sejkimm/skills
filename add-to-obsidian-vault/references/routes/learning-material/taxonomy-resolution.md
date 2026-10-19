@@ -25,14 +25,20 @@ Use operating rules as the source of truth for folder placement and MOC behavior
 
 ## Resolve Placement
 
+0. If the item is a raw source, apply the vault boundary rule first. Continue only if the source belongs in the learning-material tree.
 1. Rewrite the source material into one learning question.
 2. Read the active folder decision table from the operating rules.
 3. Choose exactly one physical top-level folder by primary learning lens.
 4. Read the active ambiguity rules for cross-domain cases.
-5. Inspect the real folder tree under the chosen top-level folder.
-6. Choose the narrowest existing leaf folder that matches the learning question and preserves the folder content rule.
+5. Apply the active folder-naming rules. Do not select or create a folder named after a genre, a proper noun (vendor, product, open-source project, programming language, event, person), or a catch-all name such as "Other" or "Misc", if the active rules forbid it.
+6. Inspect the real folder tree under the chosen top-level folder.
+7. Choose the narrowest existing leaf folder that matches the learning question and preserves the folder content rule.
 
 Do not create a new leaf folder for a single note unless the user explicitly asks for a structural change. Store one level up until the topic has enough notes to justify a new folder, but never place a normal note directly in a branch folder that already contains subfolders.
+
+## Reserved Folders
+
+A folder that the active rules mark as reserved is a valid destination, even when it is empty. Do not delete, rename, or merge a reserved folder.
 
 ## Folder Content Rule
 
@@ -56,7 +62,7 @@ Use metadata and dynamic MOCs for secondary axes. Do not move a note into a fold
 - project where the question arose
 - application domain that is not the primary learning question
 
-If placement remains unclear, ask one concise question before writing. Do not use Inbox as a fallback for new notes.
+If placement remains unclear, follow the New Note Destination Rule in `references/router.md`. Do not use Inbox as a fallback for new notes.
 
 ## Anti-Drift Rules
 
