@@ -1,11 +1,13 @@
 ---
 name: create-structured-note
-description: Use when the user asks to reorganize raw text, links, uploaded documents, or session content into a readable Markdown note, including requests like "정리해줘", "노트로 정리", "note 형태로", "structure this as a note", "make this into notes", "마크다운 노트로", "summarize as notes", "요약해줘", or "정리해서 보여줘".
+description: Use when the user asks to reorganize raw text, links, uploaded documents, or session content into a readable Markdown note, including requests like "정리해줘", "노트로 정리", "note 형태로", "structure this as a note", "make this into notes", "마크다운 노트로", "summarize as notes", "요약해줘", or "정리해서 보여줘". Not for learning notes saved to an Obsidian vault.
 ---
 
 # Structured Note
 
 Turn arbitrary content into an Obsidian-friendly Markdown note. The user copies the response into Obsidian themselves, so the deliverable is the Markdown text in chat, not a saved file.
+
+Do not use this skill when the user wants a learning note saved to an Obsidian vault. Use `add-to-obsidian-vault` instead.
 
 ## Bundled references
 
