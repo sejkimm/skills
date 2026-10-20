@@ -1,4 +1,0 @@
-interface:
-  display_name: "Structured Note"
-  short_description: "Create Obsidian-ready structured notes"
-  default_prompt: "Use $create-structured-note to turn this source into an Obsidian-ready Markdown note."
