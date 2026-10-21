@@ -139,7 +139,7 @@ references:
 - `date` is the creation time of the note in the host time zone (5.2). It is not the publication date of the source.
 - `summary` is one sentence that describes the content. It does not copy the title.
 - `references` is a flat list of URLs or vault links. List every source URL that a footnote cites. Do not use nested objects.
-- `assistant`, if the rules allow it, names the model that wrote the note. If the model is unknown, omit it.
+- `assistant`, if the rules allow it, is a list of the models that wrote the note, even if there is one. Write each model as its OpenRouter model ID, such as `anthropic/claude-fable-5.1`. If the model is unknown, omit it.
 - For an open-vocabulary list, reuse a value that the vault already uses. Make a new value only if no equal value exists.
 - Use `status` only for an exception state that the rules define.
 
