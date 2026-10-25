@@ -22,11 +22,11 @@ The writing rules are the same in both modes.
 6. Write the frontmatter (section 3).
 7. Save mode: write the file (section 5). Read it back.
 8. Check the quality gates (section 6).
-9. Report. In save mode, give the vault-relative path in one line. In chat mode, return the Markdown block.
+9. Report. In save mode, give the vault-relative path in one line. In chat mode, return the Markdown block. In both modes, report these items in the reply, not in the note: sources that you could not read, claims that you omitted, source conflicts and the source that you used, and parts that you removed.
 
 ## 2. Body Rules
 
-These rules apply to a distilled note: a note that explains a concept, mechanism, method, paper, article, or talk. For another note type, such as a record or a template, follow the body rules in the rule document of its area. If that document has no body rules, apply 2.2 to 2.6 and do not apply 2.1.
+These rules apply to a distilled note: a note that explains a concept, mechanism, method, paper, article, or talk. For another note type, such as a record or a template, follow the body rules in the rule document of its area. If that document has no body rules, apply 2.2 to 2.7 and do not apply 2.1.
 
 ### 2.1 Structure
 
@@ -61,6 +61,7 @@ These rules apply to a distilled note: a note that explains a concept, mechanism
 - Include the details of the source: numbers, steps, examples, code, and diagrams. Do not pad a short source.
 - Do not add a limits section. Exception: the source is mainly about limits, or the user asks for one.
 - Do not add a sources section, an English version, an English appendix, or a note about the writing rules.
+- Do not add a follow-up, to-do, next-step, open-question, or learning-progress section.
 - Do not use a question-and-answer form unless the user asks for a FAQ.
 
 ### 2.2 Language and Style
@@ -88,13 +89,15 @@ Other style rules:
 - Nest bullets to two levels at most. If you need a third level, make a new subsection.
 - Use a table when the same attributes apply to several items: a comparison, a schema, a decision matrix, or a list of roles. Keep a table to four columns or fewer.
 - Do not use a table for one item, or when a cell needs more than a short sentence.
+- If a table value is unknown, write `-` in the cell.
 
 ### 2.4 Faithfulness
 
 - Keep what the source says. Do not add interpretation.
 - Copy numbers exactly as the source gives them. Do not round them.
 - Do not invent facts, quotes, numbers, links, or note titles.
-- If the user asks for interpretation, put it in a separate section titled `코멘트`.
+- If you cannot confirm a claim, omit it.
+- If the user asks for interpretation, put it in a separate section titled `코멘트`. The `코멘트` section interprets the subject only.
 
 ### 2.5 Footnotes
 
@@ -119,6 +122,24 @@ Rules:
 - Link only notes that exist. Do not link a planned note.
 - Chat mode: add a wikilink only to a note that the user names.
 - Keep each source link as a Markdown link `[text](url)` or move it to a footnote. Do not delete a source URL.
+
+### 2.7 Subject Content Only
+
+A note contains only content about its subject. Put process information in the chat reply, not in the note.
+
+Do not write these items in any section, footnote, table, or blockquote:
+
+- How or why you made the note: the question, the situation, or the tool that started it. Examples: `이 노트는 ~에서 출발했다`, deep research.
+- Verification status or requests. Examples: `확인 필요`, `재확인 필요`, `미확인`, `확인하지 못했다`, `검증 후 추가`.
+- As-of or interpretation disclaimers about the note. Examples: `이 노트의 정보는 <date> 기준이다`, `이 노트의 해석이다`.
+- Notes on source conflicts or source choices. Example: `이 노트는 A를 따른다`. Use the most authoritative or the most recent source, and cite it.
+- What the source omits, what you removed, or what you could not find.
+- Notes on the form of the note. Examples: `> 원문 그대로 보존`, `전문 번역이 아님`.
+
+Allowed:
+
+- A scope sentence about the subject.
+- A date inside a sentence that states a value.
 
 ## 3. Frontmatter
 
@@ -222,6 +243,8 @@ Body:
 - In a Korean note, every sentence and bullet ends with `-다`. No `-음`, `-함`, `-됨`, `-임`, `-합니다`, or `-입니다` ending remains.
 - No limits section exists, unless an exception in 2.1 applies.
 - No sources section, English version, English appendix, or writing-rule note exists.
+- No follow-up, to-do, next-step, open-question, or learning-progress section exists.
+- Search the note for `확인 필요`, `미확인`, `확인하지 못`, `출발했다`, `작성했다`, `기준이다`, `이 노트는`, `이 note는`, and `해석이다`. Remove each match that describes the note instead of the subject (2.7).
 - Each number and each quote has a source footnote. In a note with more than one source, each claim has a source footnote.
 - Every `[^n]` has a definition, and every definition is used.
 - Every wikilink resolves to an existing note.
